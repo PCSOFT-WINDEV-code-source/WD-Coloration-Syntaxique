@@ -1,0 +1,412 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : FEN_SQLXMLHTML
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : ""
+ subtype : 0
+window :
+ name : FEN_SQLXMLHTML
+ identifier : 0x226fcef90370c994
+ internal_properties : CAAAAAgAAAAjd1n2NgnUkoR7rGYtJJrmm36t5viesl1U+FYZrW3PUMSEFXe35BSBBC72jFqMdSPvvfodnfweE2e8BctZioJxQXtDCKnGsP/KPSRKblN0+DbCfX2jTLQY21zfJKNl4YBVOUYcUMIZbBEcpfoX0YeP+h1bzN7iP6OSXIjcbrKg78TycBBoULkIPCxdcXsYGBfA3x5w/sUy5v+JRwy+MU/r1qVKI/bUtSk+EvtfifsN/FmbJMo2zJvsBLSCmmK4fUvKHx0R6ccJIVBk+ErtG7S2WluQCtI0r6/8/dFGkyqhnEtU1W1jqo3Ubx0YEN+BQxa9fNffQvhuq8kkoUzESlti2rpYO6wnF4TdaK1VpAtIl9gR9GsbZETbsRjqNyV7mYXFArJogLRkWrxwBZhRM/QeC59TVnPY4qDAGRn4PPvXuISDDO+PZyRqbfbs/hasY+0jSMkGFssM8NZO2vDjxxriDlfElolP7IV3GtC+brJ89OhHe+9t6QEnLulUzfGPT12cr1OpBuqvG4npPh/j6GgbIfK+urQc6AQgp+wILTXfwYTGM/LDIaRB3ZbNXhYqLP31YvCTPg98rCaeRjS/VEenNIDewJVnHgsPjdKtpBS3z2xbuB8HYO+vgDEMDRDDNnWDIeU4JqZRSGfZj1AqDHCdfcZ45D7OYBiqg4lW2U+nuR3g+EXY9IPng0M6r0lvanS7GiL+pLQfaokI0m1SMCSaxjcEOC1tOF8hUfzHsxcXqMrXlw3am0/y2ZNfpHcBfOhRhHu2LrPIxtJl7KM0MlaMqFIoSUUDKIpWEGfa+u5lsROkBECAkYqwed3x24qJw+3fED6utxXwt8ZcswYGfdZ4q1aaHeEQtDzm6M8aBi1tI8lSl9Bs91ICBGJhK10i0glFxrhLwWefJOGr1k+gMsq4/A9JcGh74LvhHBjOvpzVL5w9TMt+QzeqMWr14g==
+ properties :
+  width : 427
+  height : 328
+  widthClient : 425
+  heightClient : 296
+ controls :
+  -
+    name : BTN_Fermer
+    identifier : 0x226fcef90371c994
+    internal_properties : CAAAAAgAAAD97dj3ocFdXsZZkAX2YLmT2JGt5qOl/1OQ7UzmwYRZh+5s/DNITzLz9QNZMeU6Q9CliaAgxTOeKxDs3LYs9ng4wuZU33XdQCCqLYYy+StlNvSwFplnE/3XfXqQF4VjIUn7BXsocYZKhkSE6MzltLn+a57UvgH4j9QHn1LpRPySQDmeb/XbpKQ+CtEKVaUsr8uwRITqcNdE/dva96LyqHkhBOQIHMfTBs343jsL9lNhk5XdEeZqeBh8F2ENVC+adlI4nz9hQtYtD+x5VMleR64Adu0LKIpLNdPEbfIHGYNFjYiTmCxS0uMzczewDbjPLt0/U88hm4hFHngaHIbMkEpiodY5e2s6OmgaQHmKl4stASRhrnak/HfwniDxJSW/Y3thzZApihyR+9cerDYoiHY7TL20iPspztuxmrR2TqPlZPt1DdFsREhcG9qNavzKfbwRrbFcJRWJrnOOR93Eq9vklpOLnazTUu8oOS6wCWBQYpG/lzyOPLd9Xk6tnyG9rhn7Xcj/s2WkpRvf/mk11gdLshKSTnUP++Iqn/4TErm9g3PZ8aoXWDLL+jhxwTbXtd37yk2m+vpqEwj2WGQVkAVrX5nM1Nt29/3a3Ek1ctyiDWc/tvlfpzQhSsP542x0ufDK4nubKGhD47JwZo6afPk5k+GmUbgQGMSiosVnlb83+MRbso5VVerWKLhEOrFwqaDwdSNuZJztPLE2Xwykn2U1FqwsphKGy5wFE+R8BAwb5NaAw5E8Dg1L6cJ8vnbxQloAmRGppYypjlXOqf8dMzEquUzAB/fnJP2Avg319PJJ3BSGha+GpKRwtSdBNyOLBjLLbb7P69X04YqytUceBWJLRy/gsi8X+mVEailmG3wDooMkQXq7Um7CONgYPKv+0uhsSq/eCk3ELWSpHHd1/tphV0gPIlmh5g==
+    properties :
+     x : 339
+     y : 268
+     width : 80
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        internal_properties : CAAAAAgAAADQZyvpRjJZltgKBVFD+SKMukTEU1n2G2jmPSjnx1ZKdSF2vB36egNKcReVrz/xwpIZdIpZoyUu0CjPxu+MpGLAedmE/39iAmJIcu72BpKoWkpseLXy2lnJGPSMFw==
+        type : 18
+      -
+        type : 161
+        enabled : false
+  -
+    name : ONG_Onglet1
+    identifier : 0x226fcef90372c994
+    internal_properties : CAAAAAgAAACs7b6pzhceI5ICLJJmTvVZdG8ZAkDAB1u91wm48zwhgBJqHfOudpb4ey2081213sGSED5gtK5DoEN5pf5lkzETtcs2Z4UfvkMi8B8MHJJM3GCjHMBMymhnVhhgzAdNEjJF5QLoPw7pl/ujKLAxlU3/nTlXyT0zyP9b4gy+0s1T1NRjpHuHCcBpym5vfX4SDitcxoFys7ZSGzN1223l3voIxJmqt6FNe2eJSKjEYtljBsatM/vVSG/toM5YOFcRkj/S5IPxHPy4pmQkMFwIfus2hsOg+uTMNkoEwuUJuvQZ2HNusrfzkVOPH9rCjbdl+Z9dQjsBLeQK5DA/AOTIDZLTKzQMQUUTKhjtpGFSWmQGxiVwaE/81BKZH5LRVJLY7SOGHEHVz9oq6WGP6CdQGi45yLPkHjFkKMvbukChpg30tOZfkf4tO8U2gTCVl3VIy+3ExHvA5FbHD7zHlFK4hXlIvHWao53353PIOl0WHnVitOiwuVXhkcc6NzjUH5luUsjC6IszYd3ofbsZTKqv10aAdvah4euU/8Wgf2WPxLQJ+a0uawH81MfhDkEy+G8kvSH/Ere1EzZ3vQmDMU7x4DrUouSvz7HLlz8NWrX2GdXlQRj/9p7IbcXfBh68ZFOygV6QdRYV9p6qleALRt1HebdgyMtCT2vSS7cGA4LZE3eT9PrlVGg4gyt9qpJuA4ZBEILydqr2eXxvxwRCsu/R4dHO1Bq1i00N43edEBynMmpOLJ2a4+BrNl1utZ2kA39FL0A/e5Qg6vaWZ9tX/s/tYut+Mr1mXhEq0hSZc5LxIZ5h35+6kJKW80fBa0ZHK2ZbX+Xs7sY2wEh25Qe6pIX7EdtjSbwDvoteZe6F0zD1L0TxqOmVvT34GEWRWAHYG3NJN6jWX1vJ111ejS0WJfv8nWvlS70Jr+LMiLrF+rviNn98hUwlEKm6i0OnSRyZyONNvlHxtw7azhZaFEzGCqeI2LiyD2sXIdXtD6LiBRAZfzQCFJCCaSgDBkGXIurqLml7k/fFzy7cMO6e4rombdvV+lb6NqcRu8gQ/GclCCa/02WoJ3TwkRpT1xqxjEv999ltUxnD7DqDS3oJXvOlSze+WsNc4+Raomfi0scF9nNkEkox6aedU0nxHEFUFAK7+W07RT5ex7Z1P1qR7zUTlWrY+D400R/zsXk70XSlhpDK/xW3+WDfCIP5G7vok6GzCX615Qkp7Sx3+83CL0s+cYAyMesGgEY4zUikJaAy26XLK0OmId4U5zzz+T3wzD9Ifx2BLLE3nhfBd1UfZC33j7tNIP1GlMShVg==
+    properties :
+     x : 6
+     y : 6
+     width : 413
+     height : 256
+    tabs :
+     -
+       internal_properties : CAAAAAgAAACHRhh1Ah9Wnb1VpBZ9GRgbnOHSPfVHpAOrngrUkXc2aqpTzBEwv8AzjYiRCJcH954oh7YCWwb3xVNkgoN21FbPKzcuV2nHNsxZA+2cKykTWmDU1IH4bofoZg3dAHClD5YkOmJ/lZIXcZbB487ytZGX9gQ5SUqAggOPIhLqI09qDf/ndnE=
+       controls :
+        -
+          name : SAI_CODESQL
+          identifier : 0x226fcef90374c994
+          internal_properties : CAAAAAgAAACV3MrBKpS/h+hJ3xRqUizQu3qDCtWEtWIzydwqDbj6s77eGLRqpC28O9vn9OkLXz/8vmfUunJ+waIQlb7uWKmSArz1D4ui59GO1WGeRv4LGp7VanxU6jG68g6k7E/wV4iPNpasnOSWnUlAjHLaqGfiXtXWwXdGWvtjRHoYZwoeZludL3jOQqksxwz16yp1PolGIaU0njnTn1e6x+risuocGyDYOctckrBxKVnKxdAC4GM3+1Q5wA4b/XNYjjvnbdFd2StwcWQAOl138XZdLkrb4mpiFN79jtxfZebX5yWabKKBKHsNO1az8IP60yGTOyIAZmllPDtfbLKxodV4Si+JMujnej3K70Hl/SxRhW3MMPMz5SUl2OiYKuYxR2lzMpxNDdMAMAYPz+DLm3bXPaDOaKNBT+E5PMa70wmoAXCyRnwfedVP/M92cOJhrYx7M2iOybzqcey+YBiYgMn6I/JoJDsOW4BMVC5HKnxhxaNv+5E4AafrPr7KOTPx8Tco5bohOaV94fX96R7VluPaByHZ0CDouM8DkD8oeLqTCjJitsJCkDP8PxA6B1EO/MGDbTyeBoBJNmujDJi5mW639KQGAZKwBTixlDNe7dw4nCg1NcBD6x3arBfEbhwTYa//HRxbUZdBm9gXMUb7umoigrlrdUCX2jWgs9dH9ALV/hHzgjJ2dkaulQmCjKquVt+m41GVN/f04EifqWqV4mNqnWyHHTExux3XaIYdBKzVNl9DUcT+ftPg6NYVHeEc15mrlSK9VL/899AdlHYlhU85Lx0/TNEHC9+TB/19a5a9M1axmzR5moDZmlkzfeHj4ToYr8QxgFCoNw/atQsOhi7lzUyrWPXrsPDy8ETQHJt5M62x2+v4epPB/msdLZvSv67B5Xg/862cSWK89ewDTmFkZPj9YznY/atlnuL6f/LRbAB9yXzfT18OuaLLyePBUddHdYh3tmtgcmqLB4lHBdZYQWO+wRtxxzplati8AZAQ4gKAkNOfuXEfTiuxeU4DK7O2CV2evBsTJgon7hRCtFMV46R4MfepICZuIWO8oPrqQGTAUSw7RJQ7PIHryKPUs/IlcaVUsSlVRcta5eIbcsJg07sn4j9Owq5oppfCc/itugr7UJc/fewZT13QUbTL/vXzeMSba48gdverADRmqGxOG1a9o571wzgBjW3zQ52taEoScTFecWG1KzA00lWNidFMrHQtpGDqDjrb8kYwTRYjiI29RhJEbbXqqq9yqcSi4rYlqk2sf2ZqdXrdvAEBvEgEFs7Wf37i+wyCZsXseWIMYZ0O6X/xfNPYEDpb1yO0n3nF3/EP7LWrpgcmTk3BF1thkz3DekVBXj42f4yJ5wvKhSoIKzQ0fUmvtFagjxuUUdnP5s253rYVJVy4QZKr8OIqJayPmyfhwcw9q1grohCksFAM3MwbsIpgiJrmA9dd3NLPMIZF5qKLq0NbN+yT1W3nrsZ7mnICqmvTCVq0GhE//Gs1ZJ4Xthb6xd6CEPLmZy+dnBn6AkviOgtXj2BZEqokalewtQ2sWNY82nt4kUY24W1n9Q8CkmCDzic8YbPEKaPFe8e66o2v7WVENRkd4CAnhGJsKOVYcn+YQn3esDolKNjsTnZD0R4aYn9u6YwkXDvzCKOmZYKDT6/9AfK4mC5jA+tjN6HrGMx6yfXCK0JVkAISYsu5X0Uwdrd3AhhgLjfvTpMPXmBOqlkPb0MnZhVK9SfSd5Zt
+          properties :
+           x : 6
+           y : 24
+           width : 401
+           height : 204
+          type : 2
+          code_elements :
+           type_code : 3
+           p_codes :
+            -
+              type : 276
+              enabled : false
+            -
+              type : 277
+              enabled : false
+            -
+              type : 278
+              enabled : false
+            -
+              code : |1-
+               
+               bGestionRC est un booléen
+               
+               // Récupère la position du curseur
+               nCurseur est un entier = SAI_CODESQL..Curseur
+               
+               // Récupère le code SQL
+               bufCode    est un chaîne = RTFVersTexte(SAI_CODESQL)
+               
+               // Si le curseur de saisie se trouve à la fin du code
+               si nCurseur = taille(bufCode) ALORS
+               	
+               	// On devra repositionner le curseur en tenant compte des retours-chariot
+               	bGestionRC = vrai
+               FIN
+               
+               // Définit le code SQL
+               SQL:SetCode(bufCode)
+               
+               SAI_CODESQL..AffichageActif = faux
+               
+               // Effectue la coloration
+               SAI_CODESQL = SQL:Coloration()
+               
+               // Repositionne le curseur de saisie
+               SAI_CODESQL..Curseur = nCurseur + (bGestionRC ? max(0,(ChaîneOccurrence(bufCode, rc) - 1)) sinon 0)
+               
+               SAI_CODESQL..AffichageActif = vrai
+              type : 17
+        -
+          name : LIB_Saisie_de_code_SQL
+          identifier : 0x226fcef90375c994
+          internal_properties : CAAAAAgAAABWfgBulYAb1q0XtBxbOS7x7lddZsvUS2/aMV0Aa3GwweEpROyr2v86puJJxTKwbeYd1K3bJMyHhv8lrINcK1aGLLHO3IZDzbqxhSKQZRCl8b9vEyKAAZNBzIzW0ek0Krq813HuhWUdbfi9ZU+TfRsxp3YeuM+N5zOwANzwdFeXVeIvUlCLxLEGE2wQdsQWcz6qRkuPeKRWiwCTdiSoghSa5mkx4OzCG6AeEya44WbOMhQlnF4lbz5QUTEc/hh0d/IcKArhkbn0JorLsMRW4VXCcIwoH7mQHrAx4oyLznM7srEVvPWXMFKWJDhNNmEChKZXDyjsWdOYMw87Km74vyRwyKOEAKXSG9LZLYNRAL9k8x//wPvOekxlc6AuvUAPClRMx/lDowWIngfFJ0ZF62rbSrhhWsPiIgLEbRg388om9QrVOvtGqevR+8FYa+7fNgZ7wxDzxqPRrKoKepfaAgZ5+W+2N7n1gM/GWMf8dCcKX6jI9dyXEIjyfyEQCXYYac+2SPrRc5A49N4=
+          properties :
+           x : 6
+           y : 3
+           width : 401
+           height : 20
+          type : 3
+          code_elements :
+           type_code : 2
+           p_codes : []
+     -
+       internal_properties : CAAAAAgAAACpbKovRGkYx5e/wiBLy6pNzod0X7++ANONeHL2S53gxDBFwkFkMxxzTzIp5k0lxexaPfC2l2JrqWmifp2EUsRlMcF1Cl7KFSU2lBBLCEzAlaPn98BZTVp9u26QtxXA5OkbWREy4v1uzrPGemkLRI+5mKZbl/jS0NFZfPzA+ZmgxzmZoEc=
+       controls :
+        -
+          name : LIB_Saisie_de_code_XML
+          identifier : 0x226fcef90377c994
+          internal_properties : CAAAAAgAAAAZBdAozZ5h4rVdnrZXtKIv7AGHoMuxmlegb9q+ejjR2gn2r5aS72RkfVEpzX1c9O5U+I07IpX+/4mFUH5xX3R5zGoINdR6wZyo5BnOlIG3e0ISC+bCRm/mV19Z2NUXry8P2Rq0wmbPQUmidUpApD9bnoSWBRqc2a/HVRLYe9vCUAAaKVATay4UbVdEkvR7biTyd99P6pFP35o+3oY8UT6uh7CNhv0OCMhk6JMLi7XcAwcnkO+rZX6sK7BiO9YGPiJVOTLcekGCe7ZKMd9D3lbK5nhnI+I3GJe+3qhNy741MbobXnISa3wHkOjM7rnxhoBuiHjMsXuYrTMOWnNU/pi9zHsDTCsBoCOE5TF5LTt5UY9AwDMFqwrxwCBIIau+npSgz3hIku6U7YSCo2oPKkBUQtP1n+6OiMXw+g0arAB5L/fFp7zQiNeTt1a720axqz3CmEwRGNf7T9Mi3b+hnfCn4seJTFqrbl1PwVDdbeyrTSkYArQB76J4WKdjS7danslv7KcbrADyrYE4w9w=
+          properties :
+           x : 6
+           width : 401
+           height : 20
+          type : 3
+          code_elements :
+           type_code : 2
+           p_codes : []
+        -
+          name : SAI_CODEXML
+          identifier : 0x226fcef90378c994
+          internal_properties : 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
+          properties :
+           x : 6
+           y : 21
+           width : 401
+           height : 204
+          type : 2
+          code_elements :
+           type_code : 3
+           p_codes :
+            -
+              type : 276
+              enabled : false
+            -
+              type : 277
+              enabled : false
+            -
+              type : 278
+              enabled : false
+            -
+              code : |1-
+               
+               bGestionRC est un booléen
+               
+               // Récupère la position du curseur
+               nCurseur est un entier = SAI_CODexml..Curseur
+               
+               // Récupère le code XML
+               bufCode    est un chaîne = RTFVersTexte(SAI_CODEXML)
+               
+               // Si le curseur de saisie se trouve à la fin du code
+               si nCurseur = taille(bufCode) ALORS
+               	
+               	// On devra repositionner le curseur en tenant compte des retours-chariot
+               	bGestionRC = vrai
+               FIN
+               
+               // Définit le code XML
+               xml:SetCode(bufCode)
+               
+               // Effectue la coloration
+               SAI_CODEXML = XML:Coloration()
+               
+               // Repositionne le curseur de saisie
+               SAI_CODEXML..Curseur = nCurseur + (bGestionRC ? max(0,(ChaîneOccurrence(bufCode, rc) - 1)) sinon 0)
+              type : 17
+     -
+       internal_properties : CAAAAAgAAADQK/NYFx2Ej/HxMo6JSajTBMkmh8Dbdm3oxmU0+fSLeRGmuSYaH3LpwfHIclNLF/4yXjnEJvhBqvH/MAqCOYsNmRl5RgoF6fexFyiLJ8k/d91SMXCtYeINSYlcg+0Ulp+Q2wgCBeNffbNEARblOwo2bUv0PDsHGZgAo5UdOCJ3GOhC2Z4=
+       controls :
+        -
+          name : LIB_Saisie_de_code_HTML
+          identifier : 0x226fcef9037bc994
+          internal_properties : CAAAAAgAAACsrr7zZuihBA8bKCCodsabxDGHDozyS9hjNuTNxn679H9NQ0as3g+rQsLG1JKBSTRhl6JQn53b0M7Ek1+g7vGVOEtyTu9Woqmtiwh/44lJdW+Vq8VjMgSUJi+dzQlGh45W7LYZu/8PACqu3VcgNBinmBZmGYKIlbcBiWwEnsk2Y5AWPrZW4FJXSabp1Yfz/s2WvmB1XgRSy6sgG+J3FgzCURAupLqy1BzDxmkG7HpDnv8LSoFiWOcI+XNFRoaGF1HjMKtsIaFZMke5TiulcY/OB7x2SYVbCl7Li4rBvQShNXEVgORAGT48D2oHlXE8SaNiH5x4mn/RKMrXldki5bgxOMWGSrUkWUQTjmsKUrTB3AuBhVTw8h3RqGpcu00rVHE27X8nb2A811nc3NFf6tXsG+HyboRmBwIjVAlKUxpiKoCeAIGF5wnD33+clRne9EQ7wWUazRLNoeVUS5sGhoUal0DSlymcSZaOKAAh9XQHaXSlt3d0hD2VG1LGzlAB92f9MnVVnlTqRevTbmk=
+          properties :
+           x : 6
+           width : 401
+           height : 20
+          type : 3
+          code_elements :
+           type_code : 2
+           p_codes : []
+        -
+          name : SAI_CODEHTML
+          identifier : 0x226fcef9037cc994
+          internal_properties : CAAAAAgAAADQXw4s4Rbw/mG+2I/ust7WMkvCI2cPUx1m/88JR/Vl4kLnjEoADc2YpwlXH/vX4k6hIbQjlgluDbryFiF9FZH4NYKiBrOP90t7GUa06ZU3wJtnzfQLmXk54HRYVE1QOhsjzUDq2AU7EGPWKL+YnUKZecRPBc5qRRSh4D9zuKw2MM44FmtzccIdykqx8McSeJyaxzQBk4Df7DNCJeOWA7t4MAX2hu6ek+hdD0DtoQVGUErKwyRP/AAzSCUT0bdzvzA6hJMNG5TWV/1hUH2P22g2Cau4VJOwQ6DNRQ6Kk7aFA3QZzx1borDIXVN16iKF86oRdWblae4Z9q0Ka7TDLwhOwrnYf30++mJ2k8k/JlnykJ01JFT0BwcjBWqOatpGvCk+dfBk7xEi/Bai4dmUDCAoi9/1yEBEI8H4Y1tqeS5NHAGDLBZYX19RjOnzLYvmdGMmoN0exC2EWOQxTKfpPPLl7r/YvXeCgrXntH888XPBLgk8S9hLwcd/r+bUPtxMUAZBos17FhJztcHDs3QzNMELCxuzH3qzsAOyHpJByoS4taB5PQZCPhMQ1purB9eWU8QPaAoH6icoBHMxckbTiZhSNU/tWmIk/Mkm7O6KIs2WbaX4aMTHGM7xrttK9M3CTvJfj0LwTK7xBsK9oxYAe71+DlN1M+zCXKhJj4ps2zREttT73DkLDBM/bGXE678xhvI+tkf3oon65MMagSJd8uStNk0wlWOiNMgDHqlGe1YIGhsfPyMo/iON9iceWRajXuY31SGLteTJCH+8uiShix5zvPJFyp/bSzQ2AVikK9RVlVsgai36+dBGfACSKIT4niuZxppDk3n77UuCAKp+cF2btKq0gmGc2ZxAikPnY/HO9vh2R7k5iyNgeq2Iys8DvBp/WgX21zYIZpQVTTEIafiC8pD6XBI8FRW30RRes3MjDezPRxCbowtRHGZNjcKXHEATtsjl49RPk3glIiN9GeJ3EvIKjpZVzgR6kaZVv3RU7oNOrot1UM2uMACoXI4jW5Vz8AcjDPjzdKVCHnrZi/oNpHyvUy9iBtRgANoGWZ8blpOfpPSLgfwPYo6KfAI9qXdoY70Ms0HD3l3g+bTyV1sUI9aGhuUYpvej84LDHmDh0u8dvqPzHbk98PvUMuVD9AvhGOxkfTDAx8HEEiaO56N0b4z2tXjU9NwzfVJdQmn4aSYa3R6Wi+IPCYP7o35HrTJXuvNYz6ITCJN0Q0gPZLiYhRWKGAaSnWDns1wxjtJiUvAZx5+XQDW4fB8sTim/ft9TtehPdDg+8VCc4WIu9wvX/qm/rgDbZBbJX/2Hk3KH18xLfXcwY6AhA8t17QtFvFrozvB1Hr51YC/rORfBhC38bw3LZdo+EixS1hHTZKTpvos776cWkB0w8grGqvRolngPEzJtO/qB7lE+/bXp4tW/E9nqXHW28fVwfc1/1rNQAWNLrUIVgVvR96sdgtd6YfYb2xOwrg85GZTRD1k1rnK4DiLgzP11lmEDTLyZ3t53fvH9mt1iEm3uA4fbgxfVz7SnirRS2LKx1VAAk+EhwCkR5GSkwg5L+K+ByNef3Y8evZudjzq8G9t1tPU7TsJ73EQss5ZA/DnFzS/VYPXRL/YhvkY4r0K2HYBgEswmLBlXorpiJXrsiTRaDS1AGrQyRiI62Dolwl5oCzS1fdd04t9epoNgz7Ywvdk0xJjF4ERTTsowglk9NWItR/0UeG9YtpiUlhthRs92QCUqOOUVuAULRmwoFFk737Hr8HwuMus+CbpF34PNBSBcYgTpN0iuuT4VWUMEYmkQy7VZX8TFhRagHOTDjRtZ3SnoiO8mw9GD9Cf6QCZvZA/fvUn8QdJPsJOXg/aY0IS4ZLhF+XjYPHH9VTNgJfmwAkz2p7UsjjPlPh062tRn8lGNZM3cgaKcRQhln2oPcJ33vA+Yd1mLk0tqYzXsO7J8vL3iKg==
+          properties :
+           x : 6
+           y : 21
+           width : 401
+           height : 204
+          type : 2
+          code_elements :
+           type_code : 3
+           p_codes :
+            -
+              type : 276
+              enabled : false
+            -
+              type : 277
+              enabled : false
+            -
+              type : 278
+              enabled : false
+            -
+              code : |1-
+               
+               bGestionRC est un booléen
+               
+               // Récupère la position du curseur
+               nCurseur est un entier = SAI_CODEHTML..Curseur
+               
+               // Récupère le code HTML
+               bufCode    est un chaîne = RTFVersTexte(SAI_CODEHTML)
+               
+               // Si le curseur de saisie se trouve à la fin du code
+               si nCurseur = taille(bufCode) ALORS
+               	
+               	// On devra repositionner le curseur en tenant compte des retours-chariot
+               	bGestionRC = vrai
+               FIN
+               
+               // Définit le code HTML
+               HTML:SetCode(bufCode)
+               
+               SAI_CODEHTML..AffichageActif = faux
+               
+               // Effectue la coloration
+               SAI_CODEHTML = HTML:Coloration()
+               
+               // Repositionne le curseur de saisie
+               SAI_CODEHTML..Curseur = nCurseur + (bGestionRC ? max(0,(ChaîneOccurrence(bufCode, rc) - 1)) sinon 0)
+               
+               SAI_CODEHTML..AffichageActif = vrai
+              type : 17
+    type : 16
+    controls : []
+    code_elements :
+     type_code : 24
+     p_codes :
+      -
+        code : |1-
+         
+         selon ONG_Onglet1
+         	cas 1 : DonneFocus(SAI_CODESQL)
+         	cas 2 : DonneFocus(SAI_CODEXML)		
+         	cas 3 : DonneFocus(SAI_CODEHTML)		
+         FIN
+        type : 17
+      -
+        type : 292
+        enabled : false
+      -
+        type : 293
+        enabled : false
+  -
+    name : BTN_Ouvrir
+    identifier : 0x226fcef90379c994
+    internal_properties : CAAAAAgAAABcp+Th29Qcpv7gHMfwiyBkj39f3bn2pTXa5OTHJkbDmPJ5A79b3E02OThHin9/l8DM00Qq6ohgc655/Ic4AxOjFSiPMLkCrPM80C1VGapOK4WsDl0oYwu8o6rMN90wuxnUZoKru66ffM5AUbl45tdELAwvqUkDLi/J4QQdoAGfNdW5vpywu4X6NZgvxx54F9J4ATtW95m65m4flacQr/55EqAMkaU6bLjEYmNZh45E4rKY03MVu//rOJvSCIrkLbyBlpu0hXSoJvU1XDoKk5d2uvIjy8+CW8fIjY8pXZCsyN02yElbMplcUJ+J3irjtoVHz2C22EjrLmqL3ZMAwkzygYng0kAP7ar1PrZPaxjdMiYtEaKS+E1gI1qIlJT0Hfb1PFPW57UbGRfcgbknXjUckK7PjjQcdUItHIoDBM06/feDWtm5H/O2gx+MOIxduYSCcdYvvwTxNMdMEJeidWYQFpe4aHq2tCXLvmUUXHvOCBO/K78as4NfwHEyL5I0amtp5ST20fQIXddcGfuEBy+3Qray/81acXCA8tctrTpNnxPrB8tJQ3OWR65oX7ti5z0W3sdjqGqHFNXiU65im6EoiLxzi3SwMtr8/CEqhkeY0/9y2MLjqt5DttgDMeWKYkn/kSZmbIoqT0mf1hJqNbmqSAMKavuBgLdoG1g4qupgJjZgmpiOxgGQHVse4FFhyguTAia6+BrWRxoZVyM/kGH6cK44nCUaRoK2FQ08sNUPVPodlg0JxO8kZucwwGYgAZwRekAQKsJ6tXppO9AnX1yaBshdWdOISmOMk7jZSVWYb0PVdwM40yX5SrBGIkf9rxlzaeCvl3PCDxY8z1o/YRAKJ6mWJFWBRW7YdYyED4yS47mXQITYueECMxrFvAEETfAh6bia1oI3qvOvACXEBU9eRnDjVheWB8bs43qVed8WXbe3w9Qg54+j/OmDxIot9W+DzIvPew==
+    properties :
+     x : 253
+     y : 268
+     width : 80
+     height : 24
+    type : 4
+    code_elements :
+     type_code : 4
+     p_codes :
+      -
+        internal_properties : CAAAAAgAAAAZMNjVrYcgSaPomaMMQG61hmDSCFMXXAUBrpy+ul3jIZSBkeEg702Tkv3y39GYrUznu+2L6Fmm21iVlaIzSzMMX0Mjhwadu817ZDw9tzHA1/Wazz03vaNGL+A5x+25UPrjD3CaRG0NsFwWTlXwFRuXrm1neXOer6eKx/kMLZuWlQ==
+        code : |1-
+         
+         sFichier 	est une chaine
+         bufContenu	est un chaîne
+         
+         selon ONG_Onglet1
+         	
+         	// SQL
+         	cas 1
+         		
+         		// Ouvre le sélecteur de fichiers
+         		sFichier = fSélecteur("", "", "Sélectionnez un fichier...", "Code SQL (*.sql)"+TAB+"*.SQL"+RC+"Tous fichiers (*.*)"+TAB+"*.*", "SQL", fSelOuvre+fSelExiste)
+         		
+         	// XML
+         	cas 2
+         		
+         		// Ouvre le sélecteur de fichiers
+         		sFichier = fSélecteur("", "", "Sélectionnez un fichier...", "Documents XML (*.xml)"+TAB+"*.XML"+RC+"Tous fichiers (*.*)"+TAB+"*.*", "XML", fSelOuvre+fSelExiste)
+         		
+         FIN
+         
+         si sFichier <> "" alors
+         	
+         	sablier(vrai)
+         	
+         	// Charge le contenu du fichier
+         	bufContenu = fChargeTexte(sFichier)
+         	
+         	selon ONG_Onglet1
+         		
+         		// SQL
+         		cas 1
+         			
+         			// Charge le code
+         			SQL:SetCode(bufContenu)
+         			
+         			// Effectue la coloration
+         			SAI_CODESQL = sql:Coloration()
+         			
+         		// XML
+         		cas 2
+         						
+         			// Charge le code
+         			xml:SetCode(bufContenu)
+         			
+         			// Effectue la coloration
+         			SAI_CODEXML = XML:Coloration()			
+         	FIN
+         	
+         	Sablier(faux)
+         FIN
+        type : 18
+      -
+        type : 161
+        enabled : false
+ menu :
+  name : _Menu
+  identifier : 0x288731ab322e40c7
+  internal_properties : CAAAAAgAAADAfZ27Q+jJ/MBXHLGCb7PyE2Yqjvuo9mAX2ZN+LLuyQtzms1431znXR0sNCCeLESXZp1gqmo+m2mUhb2ELR2phZ8VOgUSyXddfQyxpxffipvH/iiFuFkCLgpjx1Ah9/9/ndeRpWb0s9Qcjy8oPtW3aMcRtuglgDe5Ch9/jnC/Drp19/hhf+qz96diLw5T0yWlzg33c/E8hhMwUBdSOV69/8iDQGLfTvLoTvV3YkiQ5Dce7dxB2gUx1AVvVTykQMm7G+0haIOV568KMGgPEJluRN2XjgQ11Tb8vVxt6P2g=
+  options : []
+ languages :
+  - fr-FR
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAAAEbAKhMdaElX5fk9n9A4dpNqK+txKQ5izKcIoes8j4RJdgY8AHj1G7SMYsPqHyMQSc19mejP1Z9kkWQX6Mljpw0jCbUU9iTXVPPuX53YeyWZhNJzXi2PiNVDdYQw==
+ actionbar : {}
+ code_elements :
+  type_code : 1
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAABt5LtWZkeA/NYnnD4bhuBsG5e0MwG3/k4jQdUZgBKWZNgNsDT5uOO5cC/uYNvirm9gl6Stc6PRI/lkN0y4C89L2ndIxperozdsVG/nULpKKawQwmbCjd8kOjTALUruikRCrSdPW7d9cptrx/vCUvkVd+ajYfmiWEC8CKuF9qDa
+     code : |1-
+      
+      // Colorisateur SQL
+      SQL est un cColorationSQL()
+      
+      // Colorisation XML
+      XML est un cColorationXML()
+      
+      // Colorisation HTML
+      HTML est un cColorationHTML()
+      
+      // Définit le mode de sortie pour les colorisateurs : mode RTF (dans un champ de saisie RTF)
+      SQL:SetModeSortie(cColorationSQL::OUT_RTF)
+      XML:SetModeSortie(cColorationSQL::OUT_RTF)
+      HTML:SetModeSortie(cColorationSQL::OUT_RTF)
+   -
+     code : |1-
+      
+      // Consultez le code 'A chaque modification' des champs de saisie SAI_CODESQL, SAI_CODEXML et SAI_CODEHTML
+      
+      // Définit le code SQL/XML par défaut
+      SQL:SetCode(rtfverstexte(SAI_CODESQL..valeurinitiale))
+      xml:SetCode(RTFVersTexte(SAI_CODEXML..valeurinitiale))
+      HTML:SetCode(RTFVersTexte(SAI_CODEHTML..valeurinitiale))
+      
+      // Effectue la coloration
+      SAI_CODESQL = SQL:Coloration()
+      SAI_CODEXML = XML:Coloration()
+      SAI_CODEHTML = HTML:Coloration()
+     type : 34
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     type : 11
+   -
+     type : 12
+   -
+     type : 17
+   -
+     type : 13
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FEN_Fenêtre1
+resources :
+ string_res :
+  identifier : 0x1fbe1c7800705f20
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+associated_test :
+ name : TEST_SQLXMLHTML.wxt
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

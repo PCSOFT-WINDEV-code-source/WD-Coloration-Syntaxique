@@ -1,0 +1,114 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cColorationXML
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x18872b66008cc409
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1-
+      
+      // Classe cColorationXML
+      // Classe dérivée de cColoration pour la coloration syntaxe du XML
+      cColorationXML est une classe
+      	hérite de cColoration
+      	
+      Fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     internal_properties : CAAAAAgAAAB9az4E/uONC0um6w4vxGrqLkznLmopha9eBZ1IYOuydbGMuGMKMifOeNSMq8O6/K78igFRzeTJXeQ4c+zbHP3BRyvD+A6R54sP0ND2R8ujyVtEF7bsRmCYQsCGar+Xk1VgTUUQmj/z2k5gDYrzY280Is/BcZgN1jLPCcXIP4XE+bz07ZvW+inYmf6fx+RZHuKKD2hdTlnXFZxLIBkY/knQWXldFvTl5oqtkQvpA7Y/q5XV1L3BcGyYi5ZIMV3gnR3RFTF3YSVzcsoM+fdpmjnk8mWLAO30I8YaAtvzIZHvO6OpJixqJKfSjKEvW3sOLtfklRuwVvzi3OaBw4/C+o7G9Pn9fJUEbXcGPolo51zycQ==
+     procedure_id : 1767429095862158345
+     type_code : 27
+     code : |1-
+      Procédure Constructeur(LOCAL sCode est un chaîne = "")
+      
+      	// Appel du constructeur
+      	Constructeur cColoration(sCode)
+      
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      	// Globales à modifier en cas de surcharge
+      	
+      	//					  [Début1, 			Fin1],  [Début2,		Fin2], ...
+      	L_COMMENTAIRE		= [["<!--"	, 			"-->"	]]														// Un commentaire est encadré par <!-- et -->
+      	L_CHAÎNE			= [[""""	, 			""""	], 	["'"	, 			"'"	], [">"	, 			"<"	]]		// Une chaîne débute avec " et termine par " ou il s'agit également du texte entre balise
+      	L_PROPRIETE			= [[":"	, 			""	]]														// Un appel de propriété débute avec : jusqu'à la fin du lemme
+      	L_ECHAP				= ""																				// Pas de caractère d'échappement
+      	VariableRAZ(L_CESURE)																				// Pas de césure	
+      	
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+      	// Style de coloration à modifier en cas de surcharge
+      	
+      	//					  Police, 		  Taille, 	Italique, 	Gras, Souligné, Couleur
+      	S_DEFAUT			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeFoncé]
+      	S_CHAÎNE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeClair]
+      	S_COMMENTAIRE		= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	GrisFoncé]
+      	S_CONSTANTE			= ["Courier New"	, 9, 		Vrai, 		Faux, Faux, 	BleuFoncé]
+      	S_ERREUR			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	Noir]
+      	S_FONCTION			= ["Courier New"	, 9, 		Faux, 		vrai, Faux, 	Noir]
+      	S_MOTCLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	noir]
+      	S_NUMERIQUE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeClair]
+      	S_PROPRIETE			= ["Courier New"	, 9, 		vrai, 		Faux, Faux, 	BleuFoncé]
+      	S_SYMBOLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	Noir]
+      	S_VARIABLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeFoncé]		
+      	
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+      	// Définition du langage XML
+      	
+      	_LANGAGE_ 	est un tableau de 0 cColoration::LANGAGE
+      	_ELEMENTS_	est un cColoration::LANGAGE
+      				
+      	// Définit les constantes
+      	_ELEMENTS_ =    [MARK_LANG_CONSTANTE, [...
+      						"True", "False" ...
+      					]]
+      					
+      	//				
+      	// Syntaxe équivalente (plus longue) :
+      	//
+      	// VariableRAZ(_ELEMENTS_)
+      	// _ELEMENTS_:nMarqueur = ::MARK_LANG_CONSTANTE
+      	// TableauAjoute(_ELEMENTS_:tabEléments, "True")
+      	// TableauAjoute(_ELEMENTS_:tabEléments, "False")
+      					
+      	// Enregistre les constantes
+      	Ajoute(_LANGAGE_, _ELEMENTS_)
+      
+      	// Non utilisés :
+      	// MARK_LANG_SYMBOLE	
+      	// MARK_LANG_PROPRIÉTÉ	
+      	// MARK_LANG_FONCTION	
+      	// MARK_LANG_VARIABLE	
+      	// MARK_LANG_MOTCLÉ		
+      				 
+      	// Définit le langage à utiliser	
+      	SetLangage(_LANGAGE_)
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1767429095862223881
+     type_code : 28
+     code : |1+
+      Procédure Destructeur()
+      
+     type : 655360
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : CClasse1
+resources :
+ string_res :
+  identifier : 0x1fbe1c7800045df7
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

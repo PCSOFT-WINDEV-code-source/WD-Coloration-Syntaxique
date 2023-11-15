@@ -1,0 +1,1630 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cColoration
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x18858ffe0030bce7
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAADm6rhUmR/UEHGkWTuOTKfLOVafFR4Dpg82+uWYgyn4luqrj0rQ/d9vqIkDG/bY0g0jgNR4HclpxiOIAidMQSffyXNMUMp5PZAI2SBudhu2MJdhwRsKJ2IuJbNXzWrmE3CGR1gP7SkoNDsqD4uSymcEx0xWEsVSYyVLte8+JZwRZz9kyv+fuTqz3leOPHfOSwCLNhKZxURaPyErl5JoBjrrWebwpGRjJBg0/A==
+     code : |1-
+      
+      // Structure représentant un marqueur de code 
+      // pour la coloration syntaxique
+      MARQUEUR est une structure
+      	nPosition 		est un entier			// Position du marqueur
+      	nLongueur		est un entier			// Longueur du marqueur
+      	nMarqueur		est un entier			// Marqueur
+      	sRemplacement	est une chaine			// Chaîne de remplacement
+      FIN
+      
+      // Structure représentant le langage à utiliser pour la coloration
+      LANGAGE est une structure
+      	nMarqueur 		est un entier					// Type d'éléments (MARK_LANG_XXX)
+      	tabEléments		est un tableau de 0 chaînes		// Liste des éléments concernés
+      FIN
+      
+      // Structure représentant un marqueur syntaxique du langage
+      LANGAGE_STRUCTURE est une structure
+      	sMarqueurDébut	est une chaine			// Chaîne indiquant le début du marqueur 
+      	sMarqueurFin	est une chaine			// Chaîne indiquant la fin du marqueur
+      FIN
+      
+      // Structure représentant le style d'un marqueur
+      STYLE est une structure
+      	sPolice 	est une chaine ansi	// Police utilisée
+      	nTaille 	est un entier		// Taille de la police
+      	bItalique 	est un booléen		// Italique
+      	bGras		est un booléen		// Gras
+      	bSouligné	est un booléen		// Souligné
+      	nCouleur	est un entier		// Couleur de la police
+      FIN
+      
+      // Classe cColoration
+      // Classe de base pour la génération des lemmes de code nécessaire à la coloration
+      cColoration est une classe
+      
+      	protege
+      		m_sCode				est une chaîne					// Code source à analyser
+      		m_tabMarqueurs		est un tableau de 0 marqueur	// Liste des marqueurs
+      		m_nPosition			est un entier					// Position courante
+      		m_tabLangage		est un tableau de 0 langage 	// Eléments du langage
+      		m_bChaine			est un booléen					// Chaîne en cours ?
+      		m_nChaine			est un entier					// Type de marqueur de chaines
+      		m_bCommentaires		est un booléen					// Commentaire en cours ?
+      		m_nCommentaire		est un entier					// Type de marqueur de commentaires
+      		m_nSortie			est un entier					// Type de sortie
+      		m_bFormatageLangage	est un booléen					// Flag indiquant si les éléments du langage devront être formatés comme dans le dictionnaire (casse et accent)
+      				
+      		// Eléments divers du langage
+      		L_CESURE			est un tableau de 0 LANGAGE_STRUCTURE		// Liste des symboles de césures
+      		L_COMMENTAIRE		est un tableau de 0 LANGAGE_STRUCTURE		// Liste des marqueurs de commentaires
+      		L_CHAÎNE			est un tableau de 0 LANGAGE_STRUCTURE		// Liste des marqueurs de chaînes
+      		L_PROPRIETE			est un tableau de 0 LANGAGE_STRUCTURE		// Liste des marqueurs de propriétés
+      		L_ECHAP				est une chaine								// Caractère d'échappement
+      		
+      		// Styles de coloration du langage
+      		S_SYMBOLE			est un style		// Style des symboles du langage (par exemple (, ), =, ...)
+      		S_PROPRIETE			est un style		// Style des propriétés du langage 
+      		S_FONCTION			est un style		// Style des fonctions du langage 
+      		S_CONSTANTE			est un style		// Style des constantes du langage 
+      		S_VARIABLE			est un style		// Style des variables du langage 
+      		S_MOTCLE			est un style		// Style des mots-clés du langage 
+      		S_COMMENTAIRE		est un style		// Style des commentaires
+      		S_NUMERIQUE			est un style		// Style des chiffres et des nombres
+      		S_CHAÎNE			est un style		// Style des chaînes
+      		S_CHAÎNE_URL		est un style		// Style des chaînes
+      		S_ERREUR			est un style		// Style des erreurs
+      		S_DEFAUT			est un style		// Style par défaut
+      
+      	prive		
+      		// Entête et pied
+      		ENTETE 				est une chaine ansi
+      		PIED				est une chaine ansi
+      		
+      		// Factorisation des styles
+      		Styles					est un tableau associatif (ccSansAccent + ccSansCasse + ccSansEspace + ccSansPonctuationNiEspace) de chaînes ansi
+      		m_tabConversionDébut 	est un tableau associatif (*, *, wlEntier) de chaînes
+      		m_tabConversionFin 		est un tableau associatif (*, *, wlEntier) de chaînes
+      FIN
+      
+      
+      constant	
+      	
+      	// Type de sortie
+      	OUT_HTML				= 1		// Sortie HTML
+      	OUT_RTF					= 2		// Sortie RTF
+      	OUT_GXX					= 3 	// Sortie gXX
+      	
+      	// Eléments du langage
+      	MARK_LANG_SYMBOLE		= 1		// Symbole du langage
+      	MARK_LANG_PROPRIÉTÉ		= 5		// Propriété du langage
+      	MARK_LANG_FONCTION		= 6		// Fonction du langage
+      	MARK_LANG_CONSTANTE		= 7		// Constante du langage
+      	MARK_LANG_VARIABLE		= 8		// Variable du langage
+      	MARK_LANG_MOTCLÉ		= 9		// Mot-clé du langage
+      	
+      	// Eléments divers
+      	MARK_COMMENTAIRE		= 2		// Commentaire
+      	MARK_NUMÉRIQUE			= 3		// Numérique
+      	MARK_CHAÎNE				= 4		// Chaîne
+      	MARK_CHAÎNE_URL				= 11		// Chaîne URL
+      	MARK_ERREUR				= 10	// Erreur
+      
+      	// Marqueurs internes
+      	MARK_INTERNE_RC			= "@@RC@@"
+      	
+      FIN
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     internal_properties : CAAAAAgAAAB9OcRZTDgKOLhGi7kgaZEjfP8OUCj9joM4KgEAo4rwn9f11QYFmKaytP/9OGQg+iQznn3+DTLt8nXH1uV/8A2PQC0v//Qt9qwj3YfKWq1jAUd2Q3TpI7WDzdu/ZRc+5HWyIbjjqyyHVFOBmTAgOkUrf+hPKk865v2b3zXCJccKwdvP9LgX+w00ETopQetZXNwt7oDwhmNXtgTHw0fs72xj5COkeiJqKFOxjPm6GszYc/dqRvNZj+J81vka3c80cQajdW5Y7l2cNu47+fYrBIMhVXSK2GoCCN1/fr7xKNes+v8kQKJB8Kj1XZK8amhSlAdE19zYGgkA1jn613+HHhXDajzYGC+8FYTGAiANu68B7Vp194lKJm0txGlFTcrgvezNEPXoWA==
+     procedure_id : 1766976749900512487
+     type_code : 27
+     code : |1-
+      Procédure Constructeur(local bufCode est un chaîne = "")
+      
+      	// Définition du terme 'Lemme' (source : Wikipédia) :
+      	// Le lemme (ou lexie, ou item lexical) est l'unité autonome constituante du lexique d'une langue. 
+      	// C'est une suite de caractères formant une unité sémantique et pouvant constituer une entrée de dictionnaire.
+      
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      	// Globales à modifier en cas de surcharge
+      	
+      	// Si aucun marqueur fin n'est précisé (""), l'analyseur considérera la fin de ligne comme marqueur de fin
+      	// Le marqueur de début est obligatoire.
+      	// Il est possible de définir plusieurs marqueurs
+      	
+      	//					  [Début1, 			Fin1],  [Début2,		Fin2], ...
+      	L_CESURE			= [["..."	, 			""	]]								// Une césure début avec ... jusqu'à la fin de la ligne
+      	L_COMMENTAIRE		= [["//"	, 			""	], 	["/*"	, 			"*/"	]]		// Un commentaire débute avec // jusqu'à la fin de la ligne ou encadré par /* et */
+      	L_CHAÎNE			= [[""""	, 			""""	], 	["'"	, 			"'"	]]		// Une chaîne débute avec " et termine par "
+      	L_PROPRIETE			= [[".."	, 			""	]]								// Un appel de propriété débute avec .. jusqu'à la fin du lemme
+      	L_ECHAP				= """"													// Caractère d'échappement : "
+      
+      	// :L_xxx sont des tableaux de structures LANGAGE_STRUCTURE. On utilise une déclaration en ligne pour plus de lisibilité
+      	// On aurait pu utiliser la syntaxe suivante pour chacun des différents marqueurs :
+      	// stLANGAGE_STRUCTURE est un LANGAGE_STRUCTURE
+      	// stLANGAGE_STRUCTURE:MarqueurDébut = "..."
+      	// stLANGAGE_STRUCTURE:MarqueurFin   = ""
+      	// TableauAjoute(:L_CESURE, stLANGAGE_STRUCTURE)
+      	// ...
+      
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+      	// Style de coloration à modifier en cas de surcharge
+      	
+      	//					  Police, 		  Taille, 	Italique, 	Gras, Souligné, Couleur
+      	S_DEFAUT			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	vertfonce]
+      	S_CHAÎNE			= ["Arial"		, 9, 		faux, 		faux, faux, 	MagentaFoncé]
+      	
+      	S_CHAÎNE_URL			= S_CHAÎNE
+      	S_CHAÎNE_URL.bSouligné=vrai
+      	
+      	S_COMMENTAIRE		= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	grisfonce]
+      	S_CONSTANTE			= ["Courier New"	, 9, 		vrai, 		Faux, Faux, 	BleuClair]
+      	S_ERREUR			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	rougefonce]
+      	S_FONCTION			= ["Courier New"	, 9, 		faux, 		Faux, Faux, 	BleuClair]
+      	S_MOTCLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	noir]
+      	S_NUMERIQUE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	MagentaFoncé]
+      	S_PROPRIETE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	Noir]
+      	S_SYMBOLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	Noir]
+      	S_VARIABLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	BleuClair]	
+      	
+      	// :S_xxx sont des structures STYLE. On utilise une déclaration en ligne pour plus de lisibilité
+      	// On aurait pu utiliser la syntaxe suivante pour chacun des styles :
+      	// :S_DEFAUT:Police 	= "Courier New"
+      	// :S_DEFAUT:Taille 	= 9
+      	// :S_DEFAUT:Italique 	= Faux
+      	// :S_DEFAUT:Gras		= Faux
+      	// :S_DEFAUT:Souligné	= Faux
+      	// :S_DEFAUT:Couleur	= VertFoncé
+      	// ...
+      
+      	// Mode de sortie par défaut
+      	m_nSortie = ::OUT_HTML
+      
+      	// Conserve le code à analyser
+      	SetCode(bufCode)
+      	
+      	// Par défaut, le formatage des éléments du langage est actif
+      	SetFormatageLangage(vrai)
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1766976749900578023
+     type_code : 28
+     code : |1-
+      Procédure Destructeur()
+     type : 655360
+   -
+     name : SetCode
+     procedure_id : 1766978652571139385
+     type_code : 12
+     code : |1-
+      // Résumé : Définit le code à analyser
+      // Syntaxe :
+      //SetCode ( [<bufCode> est chaîne])
+      //
+      // Paramètres :
+      //	bufCode (chaîne) : Code à analyser
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure SetCode(local bufCode est un chaîne = "")
+      
+      	// Conserve le code à analyser (en mode RTF, remplace les \ par \\)
+      	m_sCode = (m_nSortie = OUT_RTF ? remplace(bufCode, "\", "\\") sinon bufCode)
+      	
+      	// RAZ
+      	m_bCommentaires = faux
+      	m_nCommentaire  = 0
+      	m_nPosition	 	= 0
+      	m_bChaine		= faux
+      	m_nChaine		= 0
+      	SupprimeTout(:m_tabMarqueurs)
+     type : 458752
+   -
+     name : GetCode
+     procedure_id : 1766978863024586373
+     type_code : 12
+     code : |1-
+      // Résumé : Renvoie le code à analyser (défini avec la méthode SetCode)
+      // Syntaxe :
+      //[ <Résultat> = ] GetCode ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	chaîne : Code à analyser
+      //
+      Procédure GetCode()
+      
+      renvoyer m_sCode
+     type : 458752
+   -
+     name : SetLangage
+     procedure_id : 1766980142924941888
+     type_code : 12
+     code : |1-
+      // Résumé : Définit le langage à utiliser pour la coloration
+      // Syntaxe :
+      //SetLangage (<_Langage_>)
+      //
+      // Paramètres :
+      //	_Langage_ : Tableau de cColoration:LANGAGE
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure SetLangage(_Langage_)
+      
+      	// Conserve le langage
+      	m_tabLangage = _Langage_
+      	
+      	//tri une fois pour toute => accélère les recherches
+      	pour i = 1 _a_ m_tabLangage..Occurrence
+      		TableauTrie(m_tabLangage[i].tabEléments,tccSansCasse+tccSansAccent+ttCroissant)
+      	FIN
+     type : 458752
+   -
+     name : Coloration
+     procedure_id : 1766980632551261571
+     type_code : 12
+     code : |1-
+      // Résumé : Effectue la coloration syntaxique du code
+      // Syntaxe :
+      //[ <Résultat> = ] Coloration ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	chaîne UNICODE :     Code mis en forme
+      //
+      Procédure Coloration()
+      
+      	sCode				est un chaîne
+      	sCodeCouleur		est un chaîne
+      	sLigne			est un chaîne
+      	sPortion			est un chaîne
+      	sLigneCouleur		est un chaîne
+      	
+      	// Charge le code
+      	sCode = m_sCode
+      	si sCode ~= "" alors renvoyer sCodeCouleur
+      	
+      	// On remplace les retours-chariot
+      	sCode = remplace(sCode, rc, caract(10))
+      	sCode = remplace(sCode, caract(10), rc)
+      	
+      	// On colore le code ligne à ligne
+      	pour toute chaine sLigne de sCode separee par rc
+      			
+      		sLigneCouleur = ""
+      				
+      		pour chaque chaine sPortion de sLigne separee par SeparateurLigne() 
+      			
+      			sLigneCouleur += [SeparateurLigne()]
+      				
+      			// Si la ligne est analysable
+      			si taille(ChaîneFormate(sPortion, ccSansEspace)) > 0 ALORS
+      				
+      				// Coloration de la ligne
+      				LigneColoration(sPortion, sLigneCouleur)
+      			sinon
+      				
+      				// Rien à coloriser
+      				sLigneCouleur = sPortion
+      			FIN		
+      		fin
+      		
+      		// Complète le code mis en forme
+      		sCodeCouleur += sLigneCouleur + MARK_INTERNE_RC
+      	FIN
+      	
+      	selon m_nSortie
+      		
+      		// Mode gXX
+      		cas OUT_GXX
+      			sCodeCouleur = ENTETE + Remplace(sCodeCouleur, MARK_INTERNE_RC, RC) 			+ PIED
+      		
+      		// Mode HTML
+      		cas OUT_HTML
+      			sCodeCouleur = ENTETE + Remplace(sCodeCouleur, MARK_INTERNE_RC, "<br>" + RC) 	+ PIED
+      		
+      		// Mode RTF
+      		cas OUT_RTF	
+      			sCodeCouleur = ENTETE + remplace(sCodeCouleur, MARK_INTERNE_RC, "\par" + rc) 		+ PIED
+      	FIN
+      	
+      renvoyer sCodeCouleur
+     type : 458752
+   -
+     name : LigneColoration
+     procedure_id : 1766982436437618244
+     type_code : 12
+     code : |1-
+      // Résumé : Effectue la coloration d'une ligne de code
+      // Syntaxe :
+      //LigneColoration (<bufLigne> est chaîne, <bufLigneCouleur> est chaîne)
+      //
+      // Paramètres :
+      //	bufLigne (chaîne) : Ligne de code à analyser
+      //	bufLigneCouleur (chaîne) : (sortie) Ligne de code colorisée
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure protegee virtuelle LigneColoration(local bufLigne est un chaîne, bufLigneCouleur est un chaîne)
+      
+      	nLemmeLongueur		est un entier = 1
+      	nLemmePosition		est un entier = 1
+      	stMarqueur			est un MARQUEUR
+      	bufElément			est un chaîne
+      
+      	// RAZ
+      	bufLigneCouleur = ""
+      	m_nPosition	= 1
+      
+      	// Vide la liste des marqueurs
+      	TableauSupprimeTout(m_tabMarqueurs)
+      	
+      	// On parcourt la ligne
+      	tantque nLemmeLongueur > 0
+      		
+      		// Analyse du lemme
+      		nLemmeLongueur = LemmeAnalyse(bufLigne[[nLemmePosition a]])
+      		
+      		// Position suivante
+      		nLemmePosition += nLemmeLongueur
+      		m_nPosition = nLemmePosition
+      	FIN
+      	
+      	// RAZ
+      	nLemmePosition = 1
+      	
+      	// Pour chaque marqueur, on convertit
+      	pour chaque element stMarqueur de m_tabMarqueurs
+      		
+      		// Chaîne précédente
+      		bufLigneCouleur += bufLigne[[nLemmePosition a stMarqueur:nPosition - 1]]
+      		
+      		// Définit l'élément qui sera affiché
+      		si m_bFormatageLangage = vrai alors
+      			
+      			SI stMarqueur:sRemplacement = "" ALORS
+      				
+      				// On extrait la chaîne marquée
+      				bufElément = bufLigne[[stMarqueur:nPosition sur stMarqueur:nLongueur]]
+      			SINON
+      				
+      				// On prend la chaîne de remplacement
+      				bufElément = stMarqueur:sRemplacement
+      			FIN	
+      		
+      		sinon
+      			
+      			// On extrait la chaîne marquée
+      			bufElément = bufLigne[[stMarqueur:nPosition sur stMarqueur:nLongueur]]
+      		FIN
+      				
+      		// Coloration
+      		bufLigneCouleur += 	MarqueurConversion(stMarqueur, Vrai) 	+ 
+      							bufElément 								+
+      							MarqueurConversion(stMarqueur, faux)
+      		// Suite
+      		nLemmePosition = stMarqueur:nPosition + stMarqueur:nLongueur
+      	FIN
+      	
+      	// Suite de la chaîne
+      	bufLigneCouleur += bufLigne[[nLemmePosition a]]
+     type : 458752
+   -
+     name : LemmeAnalyse
+     internal_properties : CAAAAAgAAABouuwGQeRG+FafNER09F7TtGg1nM/VEUTRJB7LW2XgxFBxbfYm5VPvd7lrLNEeTBZ1DPx533hBQ/Is+0bJXBwWKzmV9QA5bM31GqC0JvWFqw2/1qb1HAjk31CVAhnArTuYGlLIPEVALNkAVeXoArbiCq3SVWrL06k3sP3KIe4L++MycclV2NV/YfKOrnipJ4NVGdj1TQ==
+     procedure_id : 1766983540244274172
+     type_code : 12
+     code : |1-
+      // Résumé : Analyse une chaîne pour extraire les lemmes
+      // Syntaxe :
+      //[ <Résultat> = ] LemmeAnalyse (<bufLemmes> est chaîne)
+      //
+      // Paramètres :
+      //	bufLemmes (chaîne) : Chaîne contenant les lemmes à extraire
+      // Valeur de retour :
+      // 	Type indéterminé :           Longueur du lemme identifié
+      //
+      Procédure protegee virtuelle LemmeAnalyse(local bufLemmes est un chaîne)
+      
+      	nLemmeLongueur		est un entier
+      	nLemmePosition		est un entier
+      	nFinLigne			est un entier
+      	sCaractère			est une chaine
+      	
+      	// On commence par le premier caractère
+      	nLemmeLongueur = 0; nLemmePosition = 1
+      	sCaractère = bufLemmes[[nLemmePosition]]
+      	
+      	// Si c'est une chaîne vide
+      	si taille(sCaractère) = 0 _ou_ sCaractère dans ("", caract(0)) ALORS
+      		renvoyer 0
+      	FIN
+      	
+      	// Caractère blanc ?
+      	si sCaractère dans (" ", esp, tab) ALORS
+      //	si sCaractère dans ( esp, tab) ALORS
+      		
+      		// On lit tous les caractères blancs
+      		tantque sCaractère DANS (" ", ESP, TAB)
+      //		tantque sCaractère DANS ( ESP, TAB)
+      			
+      			// Incrémente la longueur du lemme
+      			nLemmeLongueur ++; nLemmePosition ++
+      			
+      			// Caractère suivant
+      			sCaractère = bufLemmes[[nLemmePosition]]
+      		FIN
+      		
+      		// Renvoie la longueur
+      		renvoyer nLemmeLongueur
+      	FIN
+      	
+      	// Dans un bloc de commentaire ?
+      	si m_bCommentaires ALORS
+      		
+      		// On lit tous les caractères jusqu'à arriver sur le marqueur de fin des commentaires
+      		tantque pas (sCaractère = L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin[[1]] _ET_ bufLemmes[[nLemmePosition + 1 sur Taille(L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin) - 1]] = L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin[[2 A]])
+      					
+      			// Incrémente la longueur du lemme
+      			nLemmeLongueur ++; nLemmePosition ++
+      			
+      			// Caractère suivant
+      			sCaractère = bufLemmes[[nLemmePosition]]
+      			si sCaractère = "" alors sortir
+      		FIN
+      		
+      		// On a atteint la fin de la ligne
+      		si sCaractère = "" alors
+      			
+      			// Ajoute le marqueur
+      			MarqueurAjoute(MARK_COMMENTAIRE, taille(bufLemmes))
+      			
+      			// Renvoie la longueur
+      			renvoyer nLemmeLongueur
+      		sinon
+      			
+      			// Ajoute le marqueur
+      			nLemmeLongueur += taille(L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin)
+      			MarqueurAjoute(MARK_COMMENTAIRE, max(1, nLemmeLongueur))
+      			
+      			// Fin du bloc de commentaires
+      			m_bCommentaires = faux
+      			
+      			// Renvoie la longueur
+      			renvoyer nLemmeLongueur
+      		FIN
+      		
+      	FIN
+      	
+      	// Dans un bloc chaîne ?
+      	si m_bChaine alors
+      		
+      		// On lit tous les caractères jusqu'à arriver sur le marqueur de fin des chaînes
+      		TANTQUE PAS (sCaractère = l_chaine[m_nChaine]:sMarqueurFin[[1]] _ET_ bufLemmes[[nLemmePosition + 1 sur Taille(L_CHAÎNE[m_nChaine]:sMarqueurFin) - 1]] = L_CHAÎNE[m_nChaine]:sMarqueurFin[[2 A]])
+      			
+      			// Incrémente la longueur du lemme
+      			nLemmeLongueur ++; nLemmePosition ++
+      			
+      			// Caractère suivant
+      			sCaractère = bufLemmes[[nLemmePosition]]
+      			SI sCaractère = "" ALORS SORTIR
+      		FIN
+      		
+      		// On a atteint la fin de la ligne
+      		SI sCaractère = "" ALORS
+      			
+      			// Ajoute le marqueur
+      			MarqueurAjoute(MARK_CHAÎNE, Taille(bufLemmes))
+      			
+      			// Renvoie la longueur
+      			RENVOYER nLemmeLongueur
+      		SINON
+      			
+      			SI L_CHAÎNE[m_nChaine]:sMarqueurDébut <> L_CHAÎNE[m_nChaine]:sMarqueurFin ALORS
+      				
+      				// Ajoute le marqueur
+      				marqueurAjoute(MARK_CHAÎNE, (nLemmeLongueur))
+      				
+      				// Ajoute le marqueur
+      				MarqueurAjoute(MARK_LANG_SYMBOLE, Taille(L_CHAÎNE[m_nChaine]:sMarqueurFin))
+      				
+      				// Ajoute la longueur du marqueur
+      				nLemmeLongueur += (Taille(L_CHAÎNE[m_nChaine]:sMarqueurFin))			
+      			SINON
+      				
+      				// Ajoute la longueur du marqueur
+      				nLemmeLongueur += (Taille(L_CHAÎNE[m_nChaine]:sMarqueurDébut))				
+      				
+      				// Ajoute le marqueur
+      				MarqueurAjoute(MARK_CHAÎNE, nLemmeLongueur)				
+      			FIN
+      			
+      			// Fin de la chaîne multiligne
+      			m_bChaine = faux
+      			
+      			// Renvoie la longueur
+      			RENVOYER nLemmeLongueur
+      		FIN
+      		
+      	FIN
+      	
+      	// Césure ?
+      	pour i = 1 _a_ l_CESURE..occurrence
+      		si sCaractère = L_CESURE[i]:sMarqueurDébut[[1]] _et_ bufLemmes[[2 sur taille(L_CESURE[i]:sMarqueurDébut) - 1]] = L_CESURE[i]:sMarqueurDébut[[2 a]] ALORS
+      			
+      			// Ajoute le marqueur
+      			MarqueurAjoute(MARK_LANG_SYMBOLE, Taille(L_CESURE[i]:sMarqueurDébut))
+      			
+      			// Pas de marqueur de fin pour une césure
+      			// On prend donc la fin de la ligne
+      			nFinLigne = taille(bufLemmes[[Taille(L_CESURE[i]:sMarqueurDébut) + 1 a]])
+      			
+      			// Après une césure, il ne doit pas y avoir de code, on considère donc qu'il s'agit de commentaires
+      			MarqueurAjoute(MARK_COMMENTAIRE, nFinLigne)
+      				
+      			// Renvoie la longueur
+      			renvoyer nFinLigne + Taille(L_CESURE[i]:sMarqueurDébut)			
+      		FIN
+      	fin
+      	
+      	// Commentaire ?
+      	pour i = 1 _a_ L_COMMENTAIRE..occurrence 
+      		si sCaractère = L_COMMENTAIRE[i]:sMarqueurDébut[[1]] _et_ bufLemmes[[2 sur Taille(L_COMMENTAIRE[i]:sMarqueurDébut) - 1]] = L_COMMENTAIRE[i]:sMarqueurDébut[[2 A]] ALORS
+      			
+      			// Pas de marqueur de fin
+      			si L_COMMENTAIRE[i]:sMarqueurFin <> "" alors
+      				
+      				// La prochaine ligne fera partie des commentaires
+      				m_bCommentaires = Vrai
+      				m_nCommentaire  = i
+      				
+      				// On cherche la fin de la chaîne
+      				BOUCLE
+      					
+      					// Incrémente la longueur du lemme
+      					nLemmeLongueur ++; nLemmePosition ++
+      					
+      					// Caractère suivant
+      					sCaractère = bufLemmes[[nLemmePosition]]
+      					
+      				// Jusqu'à ce que le marqueur de fin de chaîne soit rencontré
+      				A FAIRE TANTQUE PAS (sCaractère = L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin[[1]] _ET_ bufLemmes[[nLemmePosition + 1 sur Taille(L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin) - 1]] = L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin[[2 A]]) _ET_ sCaractère <> ""
+      				
+      				si nLemmePosition < taille(bufLemmes) ALORS
+      					m_bCommentaires = faux
+      					
+      					// Position de la fin du commentaire
+      					nLemmeLongueur += Taille(L_COMMENTAIRE[m_nCommentaire]:sMarqueurFin)
+      					nFinLigne = nLemmeLongueur	
+      				sinon
+      					
+      					// On utilise la fin de la ligne
+      					nFinLigne = Taille(bufLemmes)	
+      				FIN
+      				
+      			sinon
+      				
+      				// La prochaine ligne ne fera pas partie des commentaires
+      				m_bCommentaires = faux
+      				m_nCommentaire  = 0
+      				
+      				// On utilise la fin de la ligne
+      				nFinLigne = Taille(bufLemmes)				
+      			fin
+      			
+      			// Ajoute le marqueur
+      			MarqueurAjoute(MARK_COMMENTAIRE, nFinLigne)
+      				
+      			// Renvoie la longueur
+      			renvoyer nFinLigne		
+      		FIN
+      	fin
+      	
+      	// Nombre ?
+      	si EstUnNombre(sCaractère) ALORS
+      		
+      		// Analyse le nombre
+      		nLemmeLongueur = LemmeAnalyseNombre(bufLemmes)
+      		
+      		// Ajoute le marqueur
+      		MarqueurAjoute(MARK_NUMÉRIQUE, nLemmeLongueur)
+      		
+      		// Renvoie la longueur
+      		renvoyer nLemmeLongueur
+      	FIN
+      	
+      	// Chaîne de caractères ?
+      	POUR i = 1 _a_ L_CHAÎNE..occurrence 
+      		SI sCaractère = L_CHAÎNE[i]:sMarqueurDébut[[1]] _ET_ bufLemmes[[2 sur Taille(L_CHAÎNE[i]:sMarqueurDébut) - 1]] = L_CHAÎNE[i]:sMarqueurDébut[[2 A]] ALORS
+      			
+      			// On cherche la fin de la chaîne
+      			BOUCLE
+      			
+      				// Incrémente la longueur du lemme
+      				nLemmeLongueur ++; nLemmePosition ++
+      				
+      				// Caractère suivant
+      				sCaractère = bufLemmes[[nLemmePosition]]
+      				
+      				si sCaractère = L_ECHAP alors
+      					// Incrémente la longueur du lemme
+      					nLemmeLongueur +=2; nLemmePosition +=2
+      					
+      					// Caractère suivant
+      					sCaractère = bufLemmes[[nLemmePosition]]
+      				FIN
+      		
+      			// Jusqu'à ce que le marqueur de fin de chaîne soit rencontré
+      			a faire tantque ...
+      				pas (sCaractère = L_CHAÎNE[i]:sMarqueurFin[[1]] _ET_ bufLemmes[[nLemmePosition + 1 sur Taille(L_CHAÎNE[i]:sMarqueurFin) - 1]] = L_CHAÎNE[i]:sMarqueurFin[[2 A]]) ...
+      				_et_ sCaractère <> "" ...
+      				//chaîne autorise espace
+      				_et_ (sCaractère<>" " _OU_ DelimiteurChaineAutoriseEspace(L_CHAÎNE[i]:sMarqueurDébut[[1]] ))
+      			
+      			// On atteint la fin de la ligne
+      			si sCaractère = "" ALORS				
+      				m_bChaine	= Vrai			
+      				m_nChaine	= i
+      			FIN
+      			
+      			si L_CHAÎNE[i]:sMarqueurDébut <> L_CHAÎNE[i]:sMarqueurFin alors
+      				
+      				MarqueurAjoute(MARK_LANG_SYMBOLE, taille(L_CHAÎNE[i]:sMarqueurDébut))
+      				
+      				// Ajoute le marqueur
+      				MarqueurAjoute(MARK_CHAÎNE, (nLemmeLongueur - 1))
+      				
+      				// Ajoute le marqueur
+      				MarqueurAjoute(MARK_LANG_SYMBOLE, Taille(L_CHAÎNE[i]:sMarqueurFin))
+      				
+      				// Ajoute la longueur du marqueur
+      				nLemmeLongueur += (Taille(L_CHAÎNE[i]:sMarqueurFin))	
+      				
+      			sinon
+      
+      				// Ajoute la longueur du marqueur
+      				nLemmeLongueur += (Taille(L_CHAÎNE[i]:sMarqueurDébut))				
+      				
+      				// Ajoute le marqueur
+      				MarqueurAjoute(MARK_CHAÎNE, nLemmeLongueur)				
+      			FIN
+      						
+      			
+      			// Renvoie la longueur
+      			renvoyer nLemmeLongueur
+      		FIN
+      	fin
+      	
+      	// Propriété ?
+      	POUR i = 1 _a_ L_PROPRIETE..occurrence 
+      //		si sCaractère = L_PROPRIETE[i]:sMarqueurDébut[[1]] _ET_ bufLemmes[[2 sur Taille(L_PROPRIETE[i]:sMarqueurDébut) - 1]] = L_PROPRIETE[i]:sMarqueurDébut[[2 A]] ALORS
+      		SI ...
+      			sCaractère = L_PROPRIETE[i]:sMarqueurDébut[[1]] ...
+      		_ET_  ...
+      		(	Taille(L_PROPRIETE[i]:sMarqueurDébut) = 1 ...
+      			_OU_ ...
+      			Taille(L_PROPRIETE[i]:sMarqueurDébut) > 1 _ET_ bufLemmes[[2 sur Taille(L_PROPRIETE[i]:sMarqueurDébut) - 1]] = L_PROPRIETE[i]:sMarqueurDébut[[2 A]] ...
+      		)...		
+      		ALORS
+      			// Ajoute le marqueur
+      			MarqueurAjoute(MARK_LANG_PROPRIÉTÉ, Taille(L_PROPRIETE[i]:sMarqueurDébut))
+      			
+      			// Analyse la propriété
+      			nLemmeLongueur = LemmeAnalyseDélimiteIdentifiant(bufLemmes[[Taille(L_PROPRIETE[i]:sMarqueurDébut) + 1 A]])
+      			
+      			// Si on n'a pas trouvé de propriété
+      			si nLemmeLongueur = 0 ALORS
+      				
+      				// Renvoie la longueur du marqueur
+      				renvoyer Taille(L_PROPRIETE[i]:sMarqueurDébut)
+      			FIN
+      			
+      			// Ajoute le marqueur
+      			MarqueurAjoute(MARK_LANG_PROPRIÉTÉ, nLemmeLongueur)
+      			
+      			// Renvoie la longueur
+      			renvoyer nLemmeLongueur + Taille(L_PROPRIETE[i]:sMarqueurDébut)
+      		FIN
+      	fin
+      	
+      	// Traite le reste de la ligne
+      	nLemmeLongueur = LemmeAnalyseIdentifiant(bufLemmes)
+      	
+      renvoyer nLemmeLongueur
+     type : 458752
+   -
+     name : MarqueurAjoute
+     procedure_id : 1767024217879567522
+     type_code : 12
+     code : |1-
+      // Résumé : Enregistre un marqueur à la position en cours
+      // Syntaxe :
+      //MarqueurAjoute (<nMarqueur> est entier, <nLongueur> est entier [, <sRemplacement> est chaîne])
+      //
+      // Paramètres :
+      //	nMarqueur (entier) : Type de marqueur à enregistrer
+      //	nLongueur (entier) : Longueur du marqueur
+      //	sRemplacement (chaîne) : Chaîne de remplacement à insérer à la position du marqueur
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure PROTÉGÉE MarqueurAjoute(local nMarqueur est un entier, local nLongueur est un entier, local sRemplacement est une chaine = "")
+      
+      	stMarqueur est un marqueur
+      	
+      	// Définit les paramètres du marqueur
+      	stMarqueur:nPosition 	= m_nposition
+      	stMarqueur:nLongueur 	= nLongueur	
+      	stMarqueur:nMarqueur 	= nMarqueur
+      	stMarqueur:sRemplacement = sRemplacement
+      	
+      	// Traitement spécifique du marqueur avant l'ajout
+      	TraiteMarqueAvantAjout(stMarqueur)
+      	
+      	// Conserve le marqueur
+      	Ajoute(m_tabMarqueurs, stMarqueur)
+      	
+      	// Position suivante
+      	m_nPosition += nLongueur
+     type : 458752
+   -
+     name : EstUnNombre
+     procedure_id : 1767041148640723751
+     type_code : 12
+     code : |1-
+      // Résumé : Détermine si un caractère est un numérique
+      // Syntaxe :
+      //[ <Résultat> = ] EstUnNombre (<sCaractère> est chaîne)
+      //
+      // Paramètres :
+      //	sCaractère (chaîne) : Caractère à analyser
+      // Valeur de retour :
+      // 	booléen :  Vrai si le caractère est un numérique
+      //
+      Procédure globale EstUnNombre(local sCaractère est une chaine)
+      renvoyer sCaractère dans ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+     type : 458752
+   -
+     name : LemmeAnalyseNombre
+     procedure_id : 1767041440698567833
+     type_code : 12
+     code : |1-
+      // Résumé : Analyse un lemme pour extraire un nombre
+      // Syntaxe :
+      //[ <Résultat> = ] LemmeAnalyseNombre (<bufLemme> est chaîne)
+      //
+      // Paramètres :
+      //	bufLemme (chaîne) : Lemme à analyser
+      // Valeur de retour :
+      // 	Type indéterminé :  Longueur analysée
+      //
+      Procédure protegee virtuelle LemmeAnalyseNombre(local bufLemme est un chaîne)
+      
+      	// 0...
+      	si bufLemme[[1]] = "0" ALORS
+      		
+      		// 0x... : Nombre hexadécimal
+      		SI bufLemme[[2]] dans ("x", "X") ALORS
+      			
+      			// Analyse un nombre hexadécimal
+      			renvoyer LemmeAnalyseNombreHexadécimal(bufLemme[[3 a]]) + 2
+      		FIN
+      		
+      	FIN
+      	
+      renvoyer LemmeAnalyseNombreDécimal(bufLemme)
+     type : 458752
+   -
+     name : LemmeAnalyseNombreHexadécimal
+     procedure_id : 1767042424246111159
+     type_code : 12
+     code : |1-
+      // Résumé : Extrait un nombre hexadécimal
+      // Syntaxe :
+      //[ <Résultat> = ] LemmeAnalyseNombreHexadécimal (<bufLemme> est chaîne)
+      //
+      // Paramètres :
+      //	bufLemme (chaîne) : Lemme à analyser
+      // Valeur de retour :
+      // 	entier :  Longueur du nombre hexadécimal extrait
+      //
+      Procédure PROTÉGÉE VIRTUELLE LemmeAnalyseNombreHexadécimal(local bufLemme est un chaîne)
+      
+      	nLemmeLongueur	est un entier = 0
+      	nLemmePosition est un entier = 1
+      	sCaractère	    est une chaine
+      	
+      	// Extrait le premier caractère
+      	sCaractère = bufLemme[[nLemmePosition]]
+      	
+      	// Tantque le caractère est un caractère hexadécimal
+      	tantque EstUnNombre(sCaractère) _ou_ sCaractère dans ("a", "b", "c", "d", "e", "f", "A", "B", "C", "D", "E", "F")
+      		
+      		// Caractère suivant
+      		nLemmeLongueur ++; nLemmePosition ++
+      		sCaractère = bufLemme[[nLemmePosition]]
+      	FIN
+      	
+      // Renvoie la longueur du nombre
+      renvoyer nLemmeLongueur
+     type : 458752
+   -
+     name : LemmeAnalyseNombreDécimal
+     procedure_id : 1767043150095687705
+     type_code : 12
+     code : |1-
+      // Résumé : Extrait un nombre décimal
+      // Syntaxe :
+      //[ <Résultat> = ] LemmeAnalyseNombreDécimal (<bufLemme> est chaîne [, <bDécimal> est booléen])
+      //
+      // Paramètres :
+      //	bufLemme (chaîne) : Lemme à analyser
+      //	bDécimal (booléen - valeur par défaut=1) : Vrai s'il s'agit d'un nombre décimal, Faux sinon
+      // Valeur de retour :
+      // 	entier :    Longueur du nombre
+      //
+      PROCEDURE PROTEGEE virtuelle LemmeAnalyseNombreDécimal(LOCAL bufLemme est un chaîne, LOCAL bDécimal est un booléen = vrai)
+      
+      	nLemmeLongueur est un entier = 0
+      	nLemmePosition est un entier = 1
+      	sCaractère 		est une chaine 
+      	
+      	sCaractère = bufLemme[[nLemmePosition]]
+      	
+      	// Tant que le caractère est un numérique
+      	tantque EstUnNombre(sCaractère)
+      		
+      		// Augmente la longueur
+      		nLemmeLongueur ++; nLemmePosition ++
+      		
+      		// Caractère suivant
+      		sCaractère = bufLemme[[nLemmePosition]]
+      	FIN
+      	
+      	// Si le caractère est un . et que c'est un nombre décimal
+      	si bufLemme[[nLemmePosition]] = "." _et_ bDécimal ALORS
+      		
+      		boucle
+      			
+      			// Augmente la longueur
+      			nLemmeLongueur ++; nLemmePosition ++
+      			
+      			// Caractère suivant
+      			sCaractère = bufLemme[[nLemmePosition]]
+      			
+      		// Tant que le caractère est un numérique
+      		a faire tantque EstUnNombre(sCaractère)
+      	FIN
+      	
+      // Renvoie la longueur du nombre
+      renvoyer nLemmeLongueur
+     type : 458752
+   -
+     name : LemmeAnalyseDélimiteIdentifiant
+     procedure_id : 1767045344824028268
+     type_code : 12
+     code : |1-
+      // Résumé : Tente d'extraire un identifiant connu du langage
+      // Syntaxe :
+      //[ <Résultat> = ] LemmeAnalyseDélimiteIdentifiant (<bufLemme> est chaîne [, <sIdentifiant> est chaîne])
+      //
+      // Paramètres :
+      //	bufLemme (chaîne UNICODE) : Lemme à analyser
+      //	sIdentifiant (chaîne UNICODE - valeur par défaut="") : (sortie) Identifiant extrait
+      // Valeur de retour :
+      // 	entier :   Longueur de l'identifiant
+      //
+      Procédure protegee virtuelle LemmeAnalyseDélimiteIdentifiant(local bufLemme est un chaîne, sIdentifiant est une chaine = "")
+      
+      	nLemmeLongueur	est un entier
+      	bufParcours		est un chaîne =  Minuscule(SansAccent(bufLemme))
+      	
+      	// Le premier caractère doit être une lettre ou un symbole connu
+      	si pas DebutChaineAutorisee(bufParcours[[1]]) alors			
+      		// Ce n'est pas un identifiant
+      		sIdentifiant = ""
+      		renvoyer 0
+      	FIN
+      	
+      	// Suite du lemme
+      	bufParcours 	= bufParcours[[2 a]]
+      
+      	// Tant que les caractères suivants sont des lettres ou des chiffres
+      	tantque ContenuChaineAutorisee(bufParcours[[1]],bufParcours[[2]]) 		
+      		// Suite du lemme
+      		bufParcours 	= bufParcours[[2 A]]
+      	FIN
+      	
+      	// Autorise _ $ ou # en fin de chaîne
+      	si FinChaineAutorisee(bufParcours[[1]]) ALORS		
+      		// Suite du lemme
+      		bufParcours 	= bufParcours[[2 A]]
+      	FIN
+      	
+      	// Détermine la taille de l'identifiant
+      	nLemmeLongueur = taille(bufLemme) - taille(bufParcours)
+      	
+      	// Extrait l'identifiant
+      	sIdentifiant = bufLemme[[a nLemmeLongueur]]
+      	
+      // Renvoie la longueur de l'identifiant
+      renvoyer nLemmeLongueur
+     type : 458752
+   -
+     name : LemmeAnalyseIdentifiant
+     procedure_id : 1767047496602685451
+     type_code : 12
+     code : |1-
+      // Résumé : Analyse un lemme pour extraire un élément du langage
+      // Syntaxe :
+      //[ <Résultat> = ] LemmeAnalyseIdentifiant (<bufLemme> est chaîne)
+      //
+      // Paramètres :
+      //	bufLemme (chaîne UNICODE) : Lemme à analyser
+      // Valeur de retour :
+      // 	entier :    Longueur de l'élément extrait
+      //
+      Procédure protegee virtuelle LemmeAnalyseIdentifiant(local bufLemme est un chaîne)
+      
+      	sIdentifiant 		 est une chaine
+      	nLemmeLongueur		 est un entier
+      	nIdentifiantLongueur est un entier
+      	nStructure			 est un entier
+      	
+      	// Détermine la longueur de l'identifiant
+      	nLemmeLongueur = LemmeAnalyseDélimiteIdentifiant(SansAccent(bufLemme), sIdentifiant)
+      	si nLemmeLongueur = 0 ALORS		
+      		
+      		// Pas d'identifiant, on traite comme un symbole du langage ?
+      		MarqueurLemmeVide()
+      		renvoyer 1
+      	FIN
+      
+      	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      	// Traitement du langage
+      	
+      	// Mots-clés
+      	nStructure = Cherche(m_tabLangage, tcLinéaire, "nMarqueur", MARK_LANG_MOTCLÉ)
+      	si nStructure > 0 ALORS
+      		
+      		// Traite l'identifiant
+      		nIdentifiantLongueur = LemmeTraiteIdentifiant(sIdentifiant, nLemmeLongueur, m_tabLangage[nStructure]:tabEléments, MARK_LANG_MOTCLÉ)
+      		
+      		// Si l'identifiant a pu être traité
+      		si nIdentifiantLongueur > 0 ALORS
+      			
+      			// Renvoie la longueur
+      			renvoyer nLemmeLongueur
+      		FIN
+      	FIN
+      	
+      	// Constantes
+      	nStructure = Cherche(m_tabLangage, tcLinéaire, "nMarqueur", MARK_LANG_CONSTANTE)
+      	SI nStructure > 0 ALORS
+      		
+      		// Traite l'identifiant
+      		nIdentifiantLongueur = LemmeTraiteIdentifiant(sIdentifiant, nLemmeLongueur, m_tabLangage[nStructure]:tabEléments, MARK_LANG_CONSTANTE)
+      		
+      		// Si l'identifiant a pu être traité
+      		SI nIdentifiantLongueur > 0 ALORS
+      			
+      			// Renvoie la longueur
+      			RENVOYER nLemmeLongueur
+      		FIN
+      	FIN
+      	
+      	// Fonctions
+      	nStructure = Cherche(m_tabLangage, tcLinéaire, "nMarqueur", MARK_LANG_FONCTION)
+      	SI nStructure > 0 ALORS
+      		
+      		// Traite l'identifiant
+      		nIdentifiantLongueur = LemmeTraiteIdentifiant(sIdentifiant, nLemmeLongueur, m_tabLangage[nStructure]:tabEléments, MARK_LANG_FONCTION)
+      		
+      		// Si l'identifiant a pu être traité
+      		SI nIdentifiantLongueur > 0 ALORS
+      			
+      			// Renvoie la longueur
+      			RENVOYER nLemmeLongueur
+      		FIN
+      	FIN
+      	
+      	// Variables, éléments internes
+      	nStructure = Cherche(m_tabLangage, tcLinéaire, "nMarqueur", MARK_LANG_VARIABLE)
+      	SI nStructure > 0 ALORS
+      		
+      		// Traite l'identifiant
+      		nIdentifiantLongueur = LemmeTraiteIdentifiant(sIdentifiant, nLemmeLongueur, m_tabLangage[nStructure]:tabEléments, MARK_LANG_VARIABLE)
+      		
+      		// Si l'identifiant a pu être traité
+      		SI nIdentifiantLongueur > 0 ALORS
+      			
+      			// Renvoie la longueur
+      			RENVOYER nLemmeLongueur
+      		FIN
+      	FIN
+      	
+      // Renvoie la longueur de l'identifiant
+      renvoyer nLemmeLongueur
+     type : 458752
+   -
+     name : LemmeTraiteIdentifiant
+     procedure_id : 1767048772208072874
+     type_code : 12
+     code : |1-
+      // Résumé : Traite un identifiant du langage
+      // Syntaxe :
+      //[ <Résultat> = ] LemmeTraiteIdentifiant (<sIdentifiant> est chaîne, <nLongueur> est entier, <tabEléments>, <nMarqueur> est entier)
+      //
+      // Paramètres :
+      //	sIdentifiant (chaîne UNICODE) : Identifiant à traiter
+      //	nLongueur (entier) : Longueur de l'identifiant
+      //	tabEléments : Liste des éléments du langage pour comparaison
+      //	nMarqueur (entier) : Type d'élément à comparer
+      // Valeur de retour :
+      // 	entier :   Longueur de l'identifiant connu
+      //
+      Procédure protegee virtuelle LemmeTraiteIdentifiant(sIdentifiant est une chaine, local nLongueur est un entier,  tabEléments, local nMarqueur est un entier)
+      
+      	// Formatage pour la recherche
+      	sIdentifiantFormate est une chaîne = ChaîneFormate(sIdentifiant, ccSansAccent + ccMinuscule)
+      	
+      	i est un entier =  TableauCherche(tabEléments, tccSansAccent + tccSansCasse + tcDichotomique, sIdentifiantFormate)
+      	si i > 0 ALORS
+      		
+      		// Conserve l'identifiant connu
+      		sIdentifiant = tabEléments[i]
+      		
+      		// Ajoute le marqueur
+      		MarqueurAjoute(nMarqueur, nLongueur, tabEléments[i])
+      		
+      		// Renvoie la longueur
+      		RENVOYER nLongueur
+      	FIN
+      	
+      renvoyer 0
+     type : 458752
+   -
+     name : SetModeSortie
+     internal_properties : CAAAAAgAAABys2LP/J0nw66IhKKssoYP6nNAzZSaPrMuz/SvEzKPGFlC2VtrUc44uJnwq4FIefl963D5gIPpqefMe2vkv9CLPvQ82DkLGo90zjS8eI9r71na7kHcRRzOA9If6Z9zFtNz74Lkw+0SnVcCM92Mp+KPuRUJ8e6SiU7Bvq+ExzVt/IsbO/ik5OFs0mfHHJVD9tBxoCvfY8L6AKWEOFHwkn7L/G524No5uGPQ1kfmeDUGStrD26NeYmgh9tktFfAG9aoXvuLX+TFk3KmUoik=
+     procedure_id : 1767050760778000748
+     type_code : 12
+     code : |1-
+      // Résumé : Définit le mode de sortie
+      // Syntaxe :
+      //SetModeSortie (<nMode> est entier)
+      //
+      // Paramètres :
+      //	nMode (entier) : Mode sortie (OUT_GXX, OUT_HTML, OUT_RTF)
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure SetModeSortie(local nMode est un entier)
+      
+      	si nMode dans (OUT_GXX, OUT_HTML, OUT_RTF) ALORS
+      		
+      		si m_nSortie <> nMode ALORS
+      			
+      			// Conserve le mode de sortie
+      			m_nSortie = nMode
+      			
+      			// Définit les entêtes et pieds de coloration
+      			GénèreEntêtePied()	
+      			
+      			// Régénère
+      			SupprimeTout(m_tabConversionDébut)
+      			SupprimeTout(m_tabConversionFin)
+      			
+      			// En fonction du mode de sortie
+      			SELON m_nSortie
+      			
+      				// Sortie gXX
+      				CAS OUT_GXX
+      					
+      					// Tableau de conversion
+      					m_tabConversionDébut[MARK_CHAÎNE]			= StyleVersGXX(S_CHAÎNE)		; m_tabConversionFin[MARK_CHAÎNE]			= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_CHAÎNE_URL]		= StyleVersGXX(S_CHAÎNE_URL)	; m_tabConversionFin[MARK_CHAÎNE_URL]		= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_COMMENTAIRE]		= StyleVersGXX(S_COMMENTAIRE)	; m_tabConversionFin[MARK_COMMENTAIRE]		= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_ERREUR]			= StyleVersGXX(S_ERREUR)		; m_tabConversionFin[MARK_ERREUR]			= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_LANG_CONSTANTE]	= StyleVersGXX(S_CONSTANTE)		; m_tabConversionFin[MARK_LANG_CONSTANTE]	= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_LANG_FONCTION]	= StyleVersGXX(S_FONCTION)		; m_tabConversionFin[MARK_LANG_FONCTION]	= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_LANG_MOTCLÉ]		= StyleVersGXX(S_MOTCLE)		; m_tabConversionFin[MARK_LANG_MOTCLÉ]		= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_LANG_PROPRIÉTÉ]	= StyleVersGXX(S_PROPRIETE)		; m_tabConversionFin[MARK_LANG_PROPRIÉTÉ]	= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_LANG_SYMBOLE]		= StyleVersGXX(S_SYMBOLE)		; m_tabConversionFin[MARK_LANG_SYMBOLE]		= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_LANG_VARIABLE]	= StyleVersGXX(S_VARIABLE)		; m_tabConversionFin[MARK_LANG_VARIABLE]	= StyleVersGXX(S_DEFAUT)
+      					m_tabConversionDébut[MARK_NUMÉRIQUE]		= StyleVersGXX(S_NUMERIQUE)		; m_tabConversionFin[MARK_NUMÉRIQUE]		= StyleVersGXX(S_DEFAUT)
+      					
+      				// Sortie HTML
+      				CAS OUT_HTML
+      					
+      					// Tableau de conversion
+      					m_tabConversionDébut[MARK_CHAÎNE]			= "<font class=String>"			; m_tabConversionFin[MARK_CHAÎNE]			= "</font>"
+      					m_tabConversionDébut[MARK_CHAÎNE_URL]		= "<font class=StringURL>"		; m_tabConversionFin[MARK_CHAÎNE_URL]		= "</font>"
+      					m_tabConversionDébut[MARK_COMMENTAIRE]		= "<font class=Comment>"		; m_tabConversionFin[MARK_COMMENTAIRE]		= "</font>"
+      					m_tabConversionDébut[MARK_ERREUR]			= "<font class=Error>"			; m_tabConversionFin[MARK_ERREUR]			= "</font>"
+      					m_tabConversionDébut[MARK_LANG_CONSTANTE]	= "<font class=Constant>"		; m_tabConversionFin[MARK_LANG_CONSTANTE]	= "</font>"
+      					m_tabConversionDébut[MARK_LANG_FONCTION]	= "<font class=Function>"		; m_tabConversionFin[MARK_LANG_FONCTION]	= "</font>"
+      					m_tabConversionDébut[MARK_LANG_MOTCLÉ]		= "<font class=Keyword>"		; m_tabConversionFin[MARK_LANG_MOTCLÉ]		= "</font>"
+      					m_tabConversionDébut[MARK_LANG_PROPRIÉTÉ]	= "<font class=Property>"		; m_tabConversionFin[MARK_LANG_PROPRIÉTÉ]	= "</font>"
+      					m_tabConversionDébut[MARK_LANG_SYMBOLE]		= "<font class=Symbol>"		; m_tabConversionFin[MARK_LANG_SYMBOLE]		= "</font>"
+      					m_tabConversionDébut[MARK_LANG_VARIABLE]	= "<font class=Variable>"		; m_tabConversionFin[MARK_LANG_VARIABLE]	= "</font>"
+      					m_tabConversionDébut[MARK_NUMÉRIQUE]		= "<font class=Number>"		; m_tabConversionFin[MARK_NUMÉRIQUE]		= "</font>"			
+      					
+      				// Sortie RTF
+      				CAS OUT_RTF
+      					
+      					// 1 : chaîne
+      					// 2 : commentaire
+      					// 3 : erreur
+      					// 4 : constante
+      					// 5 : fonction
+      					// 6 : mot-clé
+      					// 7 : propriété
+      					// 8 : symbole
+      					// 9 : variable
+      					// 10 : numérique
+      					// 11: défaut
+      					// 12 : chaîne url
+      					
+      					// Tableau de conversion
+      					m_tabConversionDébut[MARK_CHAÎNE]			= StyleVersRTF(1, S_CHAÎNE, "", Vrai, Faux)		; m_tabConversionFin[MARK_CHAÎNE]			= StyleVersRTF(11, S_CHAÎNE, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_CHAÎNE_URL]		= StyleVersRTF(12, S_CHAÎNE_URL, "", Vrai, Faux)	; m_tabConversionFin[MARK_CHAÎNE_URL]		= StyleVersRTF(11, S_CHAÎNE_URL, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_COMMENTAIRE]		= StyleVersRTF(2, S_COMMENTAIRE, "", Vrai, Faux)	; m_tabConversionFin[MARK_COMMENTAIRE]		= StyleVersRTF(11, S_COMMENTAIRE, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_ERREUR]			= StyleVersRTF(3, S_ERREUR, "", Vrai, Faux)		; m_tabConversionFin[MARK_ERREUR]			= StyleVersRTF(11, S_ERREUR, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_LANG_CONSTANTE]	= StyleVersRTF(4, S_CONSTANTE, "", Vrai, Faux)	; m_tabConversionFin[MARK_LANG_CONSTANTE]	= StyleVersRTF(11, S_CONSTANTE, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_LANG_FONCTION]	= StyleVersRTF(5, S_FONCTION, "", Vrai, Faux)	; m_tabConversionFin[MARK_LANG_FONCTION]	= StyleVersRTF(11, S_FONCTION, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_LANG_MOTCLÉ]		= StyleVersRTF(6, S_MOTCLE, "", Vrai, Faux)		; m_tabConversionFin[MARK_LANG_MOTCLÉ]		= StyleVersRTF(11, S_MOTCLE, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_LANG_PROPRIÉTÉ]	= StyleVersRTF(7, S_PROPRIETE, "", Vrai, Faux)	; m_tabConversionFin[MARK_LANG_PROPRIÉTÉ]	= StyleVersRTF(11, S_PROPRIETE, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_LANG_SYMBOLE]		= StyleVersRTF(8, S_SYMBOLE, "", Vrai, Faux)		; m_tabConversionFin[MARK_LANG_SYMBOLE]		= StyleVersRTF(11, S_SYMBOLE, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_LANG_VARIABLE]	= StyleVersRTF(9, S_VARIABLE, "", Vrai, Faux)	; m_tabConversionFin[MARK_LANG_VARIABLE]	= StyleVersRTF(11, S_VARIABLE, "", Vrai, Vrai)
+      					m_tabConversionDébut[MARK_NUMÉRIQUE]		= StyleVersRTF(10, S_NUMERIQUE, "", Vrai, Faux)	; m_tabConversionFin[MARK_NUMÉRIQUE]		= StyleVersRTF(11, S_NUMERIQUE, "", Vrai, Vrai)
+      					
+      			FIN
+      		FIN
+      	FIN
+      	
+     type : 458752
+   -
+     name : GetModeSortie
+     procedure_id : 1767050954051574730
+     type_code : 12
+     code : |1-
+      // Résumé : Renvoie le mode de sortie courant
+      // Syntaxe :
+      //[ <Résultat> = ] GetModeSortie ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	entier : Mode sortie (OUT_GXX, OUT_HTML, OUT_RTF)
+      //
+      Procédure GetModeSortie()
+      renvoyer m_nsortie
+     type : 458752
+   -
+     name : MarqueurConversion
+     procedure_id : 1767052869607040959
+     type_code : 12
+     code : |1-
+      // Résumé : Convertit un marqueur
+      // Syntaxe :
+      //[ <Résultat> = ] MarqueurConversion (<stMarqueur> est MARQUEUR [, <bDébut> est booléen])
+      //
+      // Paramètres :
+      //	stMarqueur (MARQUEUR) : Marqueur à convertir
+      //	bDébut (booléen - valeur par défaut=1) : Vrai si c'est un début de marqueur, Faux sinon
+      // Valeur de retour :
+      // 	chaîne UNICODE :   Marqueur converti
+      //
+      Procédure protegee virtuelle MarqueurConversion(local stMarqueur est un marqueur, local bDébut est un booléen = vrai)
+      
+      	sConversion est un chaîne
+      	
+      	// Conversion effective 
+      	si bDébut alors
+      		sConversion = m_tabConversionDébut[stMarqueur:nMarqueur]
+      	sinon
+      		sConversion = m_tabConversionFin[stMarqueur:nMarqueur]
+      	FIN
+      	
+      renvoyer sConversion
+     type : 458752
+   -
+     name : GénèreEntêtePied
+     internal_properties : CAAAAAgAAAAeAYGHSwzCm0oOpOP8o8DkYvioJYLkMfUegJwIPzPkCcIFfxccBgfewYkrWVX2r0akbWo7x7Sb1gmbSK/Gzhskrv9Abkl+oE+AbgXLsqS3d7bS0TO+awgBnRinVwFochqW001ejjAR3+DD2o1a8uQq7x6nYSVfGc2cpFdeNypvl/5bCJlQjAZeFOjOMenzTvSWVmSyuxWkvm834UkDMISw6W4/pDYxGYlsSYzbGt0KflNjuPICqSgQPQdR6WS/h6kcfXINBfIZVAlFSQ4N9mtswlPHIjvNTKIL3TgJlrNDK/o=
+     procedure_id : 1767061657110208527
+     type_code : 12
+     code : |1-
+      // Résumé : Génère l'entête et le pied d'un code colorisé
+      // Syntaxe :
+      //GénèreEntêtePied ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure protegee virtuelle GénèreEntêtePied()
+      
+      	sStyles 	est une chaine ansi
+      	sCouleurs	est une chaine ansi
+      
+      	selon m_nSortie
+      		
+      		// Format gXX
+      		cas OUT_GXX
+      			
+      			ENTETE = StyleVersGXX(S_DEFAUT)
+      			pied	= ""
+      			
+      		// Format HTML
+      		cas OUT_HTML
+      
+      			// Génère les styles CSS		
+      			sStyles = 	StyleVersCSS(S_CHAÎNE, 		"String") 		+
+      						StyleVersCSS(S_COMMENTAIRE, "Comment") 	+
+      						StyleVersCSS(S_ERREUR, 		"Error") 		+
+      						StyleVersCSS(S_CONSTANTE, 	"Constant") 	+
+      						StyleVersCSS(S_FONCTION, 	"Function") 	+
+      						StyleVersCSS(S_MOTCLE, 		"Keyword") 	+
+      						StyleVersCSS(S_PROPRIETE, 	"Property") 	+	
+      						StyleVersCSS(S_SYMBOLE, 	"Symbol") 	+
+      						StyleVersCSS(S_VARIABLE, 	"Variable") 	+
+      						StyleVersCSS(S_NUMERIQUE, 	"Number")  +
+      						StyleVersCSS(S_CHAÎNE_URL,	"StringURL") 		
+      			
+      			ENTETE = chaineconstruit([
+      				<style type=text/css>
+      					%1
+      				</style>
+      				<div style=%2>
+      				
+      			], sStyles, StyleVersCSS(s_defaut))
+      			
+      			pied = [
+      				</div>
+      			]
+      		
+      		// Format RTF	
+      		cas OUT_RTF
+      			
+      			// Génère les styles CSS		
+      			sStyles =   StyleVersRTF(1, S_CHAÎNE, 		sCouleurs) 	+
+      						StyleVersRTF(2, S_COMMENTAIRE, 	sCouleurs) 	+
+      						StyleVersRTF(3, S_ERREUR, 		sCouleurs) 	+
+      						StyleVersRTF(4, S_CONSTANTE, 	sCouleurs) 	+
+      						StyleVersRTF(5, S_FONCTION, 	sCouleurs) 	+
+      						StyleVersRTF(6, S_MOTCLE, 		sCouleurs) 	+
+      						StyleVersRTF(7, S_PROPRIETE, 	sCouleurs) 	+	
+      						StyleVersRTF(8, S_SYMBOLE, 		sCouleurs) 	+
+      						StyleVersRTF(9, S_VARIABLE, 	sCouleurs) 	+
+      						StyleVersRTF(10,S_NUMERIQUE, 	sCouleurs)	+
+      						StyleVersRTF(11, s_defaut,		sCouleurs)    +
+      						StyleVersRTF(12, S_CHAÎNE_URL,	sCouleurs)
+      			
+      			// Entête RTF
+      			entete = chaineconstruit([
+      				{\rtf1\ansi\ansicpg1252\deff0\deflang1036{\fonttbl%1}
+      				{\colortbl ;%2}
+      				\viewkind4\uc1\pard
+      			], sStyles, sCouleurs) + StyleVersRTF(11, s_defaut, "", vrai, faux) + rc
+      			
+      			// Pied RTF
+      			PIED = [
+      				}
+      			]
+      			
+      	FIN
+     type : 458752
+   -
+     name : StyleVersGXX
+     procedure_id : 1767076689497212980
+     type_code : 12
+     code : |1-
+      // Résumé : Conversion d'un style en gXX
+      // Syntaxe :
+      //[ <Résultat> = ] StyleVersGXX (<stStyle> est STYLE)
+      //
+      // Paramètres :
+      //	stStyle (STYLE) : Style
+      // Valeur de retour :
+      // 	chaîne :  Chaîne de contrôle gXX
+      //
+      Procédure privee StyleVersGXX(local stStyle est un style)
+      
+      	sStyle est une chaine
+      	sStyle = gPolice(stStyle:sPolice) 			+ 
+      			 gPoliceTaille(stStyle:nTaille) 		+
+      			 gPoliceGras(stStyle:bGras) 			+
+      			 gPoliceItalique(stStyle:bItalique) 	+
+      			 gPoliceSoulignée(stStyle:bSouligné) +
+      			 gstylo(stStyle:nCouleur)
+      			 
+      renvoyer sStyle
+     type : 458752
+   -
+     name : StyleVersCSS
+     internal_properties : CAAAAAgAAABZ4qXyu2xdn6twPOb0qLNcBrB4g5zsABfFb3Ll0Qiny1S6bWAWbMI6oz+tG2W09APNKfV9hPCbc7SgL6YhsPn86/BJw8uWkMkNU8uE6gjGiWPYzBaGe8WvfKs1wD1Xm8ZIeznoNHQku5wVxa+65erb4HodiV6GV1DqcQseMY/VmeC6nRCw/D8+pSiVrGdtTmCcYBxKqKB+iCgJVFkAPpKKZmhr3D6hogCG4IrH1X9H2wQvNAM=
+     procedure_id : 1767078617937584826
+     type_code : 12
+     code : |1-
+      // Résumé : Conversion d'un style en CSS
+      // Syntaxe :
+      //[ <Résultat> = ] StyleVersCSS (<stStyle> est STYLE [, <sNom> est chaîne])
+      //
+      // Paramètres :
+      //	stStyle (STYLE) : Style
+      //	sNom (chaîne UNICODE - valeur par défaut="") : Nom du style CSS à générer
+      // Valeur de retour :
+      // 	chaîne UNICODE :       Style CSS
+      //
+      Procédure privee StyleVersCSS(LOCAL stStyle est un style, local sNom est une chaine = "")
+      	
+      	// Couleur HTML
+      	sCouleur est une chaine ansi
+      	sCouleur = NumériqueVersChaîne(stStyle:nCouleur, "06x")
+      	sCouleur[[5 a 6]] <=> sCouleur[[1 A 2]]
+      	
+      	sStyle est une chaine
+      	sStyle = (sNom <> "" ? "." + sNom + " {" sinon """")			+ ...
+      			 "font-family: " 	+ stStyle:sPolice + "; " 				+ ...
+      			 "font-size: "	+ stStyle:nTaille + "pt; " 				+ ...
+      			 (stStyle:bGras 		? "font-weight: bold; " sinon "")	+ ...
+      			 (stStyle:bItalique 	? "font-style: italic; " sinon "")		+ ...
+      			 (stStyle:bSouligné 	? "text-decoration: underline; " sinon "text-decoration: none; ")	+ ...
+      			 "color: #" + sCouleur + ";" + ...
+      			 (sNom <> "" ? "}" + rc sinon """")
+      	
+      renvoyer sStyle
+     type : 458752
+   -
+     name : StyleVersRTF
+     internal_properties : CAAAAAgAAACboOdEbR5C68USeOwu/gFSADatMw0M0B+jTepXj9pVmaZ4uuCwLEI60w+du2U0tKMN+dUtFIBLY9TAT5bx4IkMO7BZY+sWEAmdIzvE6gimaQNojKa26xW/nOsd2NWv044wcxGQfDz80zQt7UdyXWIDiFI1kSbOryiiifMWaQftQQiy9Vg45BfWXcC9ZN/lBoqmBUFTV/HLl/uQwcpLwz0QBK147U1CR6d5H6/gyJE1pU7xdkE=
+     procedure_id : 1767081242162689013
+     type_code : 12
+     code : |1-
+      // Résumé : Conversion d'un style en RTF
+      // Syntaxe :
+      //[ <Résultat> = ] StyleVersRTF (<nNumStyle> est entier, <stStyle> est STYLE [, <sCouleursRTF> est chaîne ANSI [, <bAttributs> est booléen [, <bAnnulationAttributs> est booléen]]])
+      //
+      // Paramètres :
+      //	nNumStyle (entier) : <indiquez ici le rôle de nNumStyle>
+      //	stStyle (STYLE) : Style
+      //	sCouleursRTF (chaîne ANSI - valeur par défaut="") : (sortie) Liste des couleurs à compléter
+      //	bAttributs (booléen - valeur par défaut=0) : Vrai si on doit seulement générer les attributs RTF, Faux pour une déclaration
+      //	bAnnulationAttributs (booléen - valeur par défaut=0) : Vrai pour annuler les attributs précédemment générés, Faux sinon
+      // Valeur de retour :
+      // 	chaîne ANSI :        Style RTF
+      //
+      Procédure privee StyleVersRTF(local nNumStyle est un entier, local stStyle est un style, sCouleursRTF est une chaine ansi = "", local bAttributs est un booléen = faux, local bAnnulationAttributs est un booléen = faux)
+      
+      	sStyle est une chaine ansi
+      	
+      	// Style intra-RTF
+      	si bAttributs ALORS
+      		
+      		
+      		si bAnnulationAttributs = faux alors
+      			
+      			// Début du marquage
+      			sStyle += "\cf" + nNumStyle + "\f" + nNumStyle 	+
+      					  (stStyle:bItalique 	? "\i" sinon "") 	+ 
+      					  (stStyle:bGras 		? "\b" SINON "") 	+ 
+      					  (stStyle:bSouligné 	? "\ul" SINON "") +  "\fs" + (stStyle:nTaille * 2) +
+      					  " "
+      		sinon
+      			
+      			// Fin du marquage
+      			sStyle += "\cf" + nNumStyle + "\f" + nNumStyle 		+
+      					  (stStyle:bSouligné 	? "\ulnone" SINON "") 	+ 
+      					  (stStyle:bGras 		? "\b0" SINON "") 	+ 
+      					  (stStyle:bItalique 	? "\i0" SINON "") 	+ 
+      					  " "
+      		
+      		fin
+      		
+      	// Styles externes
+      	sinon
+      		
+      		sStyle 			= "{\f" + nNumStyle + "\fmodern\fprq1\fcharset0 " + stStyle:sPolice + ";}"		
+      		sCouleursRTF	+= "\red" + RVBRouge(stStyle:nCouleur) + "\green" + rvbvert(stStyle:nCouleur) + "\blue" + rvbbleu(stStyle:nCouleur) + ";"
+      	FIN
+      	
+      renvoyer sStyle
+     type : 458752
+   -
+     name : SetFormatageLangage
+     procedure_id : 1780364278939109660
+     type_code : 12
+     code : |1-
+      // Résumé : Définit si les éléments du langage devront être formatés comme dans le dictionnaire (casse et accent)
+      // Syntaxe :
+      //SetFormatageLangage (<bFormateElémentsLangage> est booléen)
+      //
+      // Paramètres :
+      //	bFormateElémentsLangage (booléen) : Vrai pour activer le formatage, Faux sinon
+      // Valeur de retour :
+      // 	Aucune
+      //
+      Procédure SetFormatageLangage(local bFormateElémentsLangage est un booléen)
+      
+      	// Conserve le paramètre
+      	m_bFormatageLangage = bFormateElémentsLangage
+     type : 458752
+   -
+     name : TraiteMarqueAvantAjout
+     procedure_id : 1325902171459745414
+     type_code : 12
+     code : |1-
+      // Résumé : Traite un marqueur avant l'ajout
+      // Syntaxe :
+      //TraiteMarqueAvantAjout (<pstMarqueur> est MARQUEUR dynamique)
+      //
+      // Paramètres :
+      //	pstMarqueur (MARQUEUR dynamique) : Marqueur à traiter
+      // Valeur de retour :
+      // 	Aucune
+      //
+      PROCEDURE PROTÉGÉE virtuelle TraiteMarqueAvantAjout(pstMarqueur est un MARQUEUR dynamique <utile>)
+     type : 458752
+   -
+     name : SeparateurLigne
+     procedure_id : 1325926480982397939
+     type_code : 12
+     code : |1-
+      // Résumé : Renvoie le caractère de séparateur de lignes
+      // Syntaxe :
+      //[ <Résultat> = ] SeparateurLigne ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	chaîne ANSI : Caractère séparateur de ligne
+      //
+      PROCEDURE PROTÉGÉE virtuelle SeparateurLigne() : chaîne ansi
+      renvoyer ";"
+     type : 458752
+   -
+     name : DelimiteurChaineAutoriseEspace
+     procedure_id : 1326184385180768169
+     type_code : 12
+     code : |1-
+      // Résumé : Vérifie si le caractère est autorisé en tant que délimiteur de chaînes
+      // Syntaxe :
+      //[ <Résultat> = ] DelimiteurChaineAutoriseEspace (<sCaractère> est chaîne ANSI)
+      //
+      // Paramètres :
+      //	sCaractère (chaîne ANSI) : Caractère à tester
+      // Valeur de retour :
+      // 	booléen : Vrai si le caractère est un délimiteur autorisé, Faux sinon
+      //
+      PROCEDURE PROTÉGÉE virtuelle DelimiteurChaineAutoriseEspace(local sCaractère est une chaine ansi <utile>)
+      renvoyer vrai
+     type : 458752
+   -
+     name : MarqueurLemmeVide
+     procedure_id : 1326192884921190599
+     type_code : 12
+     code : |1-
+      // Résumé : Ajoute un lemme vide
+      // Syntaxe :
+      //MarqueurLemmeVide ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      //
+      PROCEDURE protegee virtuelle MarqueurLemmeVide()
+      
+      	// Ajoute un symbole vide
+      	MarqueurAjoute(MARK_LANG_SYMBOLE, 1) 
+     type : 458752
+   -
+     name : DebutChaineAutorisee
+     procedure_id : 1326193396022418429
+     type_code : 12
+     code : |1-
+      // Résumé : Vérifie si le caractère est autorisé en début de chaîne
+      // Syntaxe :
+      //[ <Résultat> = ] DebutChaineAutorisee (<sCaractère> est chaîne ANSI)
+      //
+      // Paramètres :
+      //	sCaractère (chaîne ANSI) : Caractère à tester
+      // Valeur de retour :
+      // 	booléen : Vrai si le caractère est autorisé, Faux sinon
+      //
+      PROCEDURE PROTÉGÉE VIRTUELLE DebutChaineAutorisee(local sCaractère est une chaine ansi)
+      RENVOYER (EstUneLettre(sCaractère) _OU_ (sCaractère DANS ("_", "$", "#")))
+     type : 458752
+   -
+     name : FinChaineAutorisee
+     procedure_id : 1326194018792820947
+     type_code : 12
+     code : |1-
+      // Résumé : Vérifie si le caractère est autorisé en fin de chaîne
+      // Syntaxe :
+      //[ <Résultat> = ] FinChaineAutorisee (<sCaractère> est chaîne ANSI)
+      //
+      // Paramètres :
+      //	sCaractère (chaîne ANSI) : Caractère à tester
+      // Valeur de retour :
+      // 	booléen : Vrai si le caractère est autorisé, Faux sinon
+      //
+      PROCEDURE protegee virtuelle FinChaineAutorisee(local sCaractère est une chaine ansi)
+      RENVOYER (sCaractère DANS ("_", "$", "#"))
+     type : 458752
+   -
+     name : EstUneLettre
+     procedure_id : 1326195384593001679
+     type_code : 12
+     code : |1-
+      // Résumé : Vérifie si un caractère est une lettre
+      // Syntaxe :
+      //[ <Résultat> = ] EstUneLettre (<sCaractère> est chaîne ANSI)
+      //
+      // Paramètres :
+      //	sCaractère (chaîne ANSI) : Caractère à tester
+      // Valeur de retour :
+      // 	booléen : Vrai si le caractère est une lettre, Faux sinon
+      //
+      PROCEDURE globale EstUneLettre(local sCaractère est une chaine ansi)
+      renvoyer (Asc("a") <= Asc(minuscule(sCaractère)) <= Asc("z"))
+     type : 458752
+   -
+     name : ContenuChaineAutorisee
+     procedure_id : 1326196363845576040
+     type_code : 12
+     code : |1-
+      // Résumé : Détermine si un caractère est autorisé
+      // Syntaxe :
+      //[ <Résultat> = ] ContenuChaineAutorisee (<sCaractère> est chaîne ANSI, <sSuivant> est chaîne ANSI)
+      //
+      // Paramètres :
+      //	sCaractère (chaîne ANSI) : Caractère en cours
+      //	sSuivant (chaîne ANSI) : Caractère suivant
+      // Valeur de retour :
+      // 	booléen : Vrai si le contenu est autorisé, Faux sinon
+      //
+      PROCEDURE PROTÉGÉE VIRTUELLE ContenuChaineAutorisee(local sCaractère est une chaine ansi, local sSuivant est une chaine ansi)
+      
+      	si EstUneLettre(sCaractère) _OU_ EstUnNombre(sCaractère) ALORS	
+      		renvoyer vrai	
+      	FIN
+      	
+      	si sCaractère dans (".",":") ALORS	
+      		SI PAS EstUneLettre(sSuivant) ALORS
+      			// Après un . ou : on doit avoir une lettre sinon ce n'est pas un identifiant
+      			renvoyer faux
+      		FIN
+      		renvoyer vrai
+      	FIN
+      
+      renvoyer faux
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : CClasse1
+resources :
+ string_res :
+  identifier : 0x1fbe1c7800485ed2
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

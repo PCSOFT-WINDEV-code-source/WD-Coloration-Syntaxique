@@ -1,0 +1,121 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WD Coloration Syntaxique
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : Le projet a pour but de ...
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : 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
+ configurations :
+  -
+    name : WD Coloration Syntaxique
+    internal_properties : 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
+    configuration_id : 15630792562738797777
+    type : 1
+    generation_name : WD Coloration Syntaxique.exe
+    version :
+     major_version : 21
+     internal_generation_version : 1
+    icon_filename : .\peinture.ico
+    language : 1
+    new_features_help :
+     name : ""
+     internal_properties : CAAAAAgAAADTr/B6gcJjh8e/IihiYSV2caMc5MdGF4ADG91bGknUnMgt7KdIXTtW/6RDiR7hkkXXi1VAOGpM3ibUUA==
+ elements :
+  identifier : 0x4afd629b001337ba
+  elements :
+   -
+     name : cColoration
+     identifier : 0x488590ad000266cc
+     internal_properties : CAAAAAgAAAC1kZ2BPhsTzJGYCnOApx+3kd5UxIZBWtdKjOA8Ys1Bp2lL1AMS7hb94l5YoGCQaFigoA==
+     physical_name : .\cColoration.wdc
+     type : 4
+   -
+     name : TEST_SQLXMLHTML
+     identifier : 0x4b013271001c1cc3
+     internal_properties : CAAAAAgAAABEwqyIN2xEZ05B48g9JZZmlIXja+0YgXGqIFjEmGe1M51l+H+VY4FmGwfxz1eJcWdR0Q==
+     physical_name : .\TEST_SQLXMLHTML.wxt
+     type : 17
+   -
+     name : Procedures globales de WD Coloration Syntaxique
+     identifier : 0x48858f9600002422
+     internal_properties : CAAAAAgAAAChnZmNOmdPYGU8rhf0LY/fZXZw0P4hOc1CbiryzFNDvQvRbomeGjqhRvLs1FyUbFykrA==
+     physical_name : .\Procedures globales de WD Coloration Syntaxique.wdg
+     type : 7
+   -
+     name : FEN_SQLXMLHTML
+     identifier : 0x4885fd4a0003a9dd
+     internal_properties : CAAAAAgAAAA0EhwYp5yUl75x09gtd9oqJKETS5GMx3eiJl7+zlE7/cMPNrFlU3FWCzehH+cZ4dchIQ==
+     physical_name : .\FEN_SQLXMLHTML.wdw
+     type : 2
+   -
+     name : cColorationSQL
+     identifier : 0x4885fdf1000537c9
+     internal_properties : CAAAAAgAAAC5leElgv+3uB0Epg/850sTLbogoKJVMIGqsOh0WqXx79kbJEPWIkKpXtrEPMQ8xDScpA==
+     physical_name : .\cColorationSQL.wdc
+     type : 4
+   -
+     name : cColorationXML
+     identifier : 0x48872b6d0000de5c
+     internal_properties : CAAAAAgAAAA5G5dzTHlNK4ziycozIFeHzm1sQDENe110xkKuBCibT1DvGVpRf9RNw2gHsJN3wCs8
+     physical_name : .\cColorationXML.wdc
+     type : 4
+   -
+     name : cColorationHTML
+     identifier : 0x426fc5870032e4a1
+     internal_properties : CAAAAAgAAACznSllthN/Ca4YYrDL7oWvaoUC1MFP7n1YkuNLlTFY8vcczhOqJnrzpYo5RmmBPqW2
+     physical_name : .\cColorationHTML.wdc
+     type : 4
+  other_elements : []
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components : []
+ report_and_queries_enabled : false
+ common_generation_directory : true
+ languages :
+  - fr-FR
+ code_elements :
+  internal_properties : CAAAAAgAAADyta1ztdEgrYxL2OIfroDzF7WpTxHA43nOPaiO8dWw0Vx+ktT0kYY/W+5/dMYhNYy+qZVHZb8274tsI4CTf3ye4wZX+srPcRKhBS20
+  type_code : 0
+  p_codes :
+   -
+     code : |1-
+      
+     type : 196608
+   -
+     code : |1-
+      
+     type : 196610
+   -
+     code : |1-
+      
+     type : 196619
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : WD Coloration Syntaxique
+     identifier : 0x4afd629c00193837
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==

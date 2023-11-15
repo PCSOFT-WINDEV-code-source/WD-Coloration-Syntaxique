@@ -1,0 +1,142 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cColorationSQL
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x1885fde800af12eb
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1-
+      
+      // Classe cColorationSQL
+      // Classe dérivée de cColoration pour la coloration syntaxe du SQL
+      cColorationSQL est une classe
+      	hérite de cColoration
+      	
+      Fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     internal_properties : CAAAAAgAAAB9az4E/uONC0um6w4vxGrqLkznLmopha9eBZ1IYOuydbGMuGMKMifOeNSMq8O6/K78igFRzeTJXeQ4c+zbHP3BRyvD+A6R54sP0ND2R8ujyVtEF7bsRmCYQsCGar+Xk1VgTUUQmj/z2k5gDYrzY280Is/BcZgN1jLPCcXIP4XE+bz07ZvW+inYmf6fx+RZHuKKD2hdTlnXFZxLIBkY/knQWXldFvTl5oqtkQvpA7Y/q5XV1L3BcGyYi5ZIMV3gnR3RFTF3YSVzcsoM+fdpmjnk8mWLAO30I8YaAtvzIZHvO6OpJixqJKfSjKEvW3sOLtfklRuwVvzi3OaBw4/C+o7G9Pn9fJUEbXcGPolo51zycQ==
+     procedure_id : 1767097601698566891
+     type_code : 27
+     code : |1-
+      Procédure Constructeur(LOCAL sCode est un chaîne = "")
+      
+      	// Appel du constructeur
+      	Constructeur cColoration(sCode)
+      
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      	// Globales à modifier en cas de surcharge
+      		
+      	//					  [Début1, 			Fin1],  [Début2,		Fin2], ...
+      	L_CESURE			= [["..."	, 			""	]]							// Une césure début avec ... jusqu'à la fin de la ligne
+      	L_COMMENTAIRE		= [["--"	, 			""	], 	["/*"	, 			"*/"	]]	// Un commentaire débute avec -- jusqu'à la fin de la ligne ou encadré par /* et */
+      	L_CHAÎNE			= [[""""	, 			""""	], 	["'"	, 			"'"	]]	// Une chaîne débute avec " et termine par " ou avec ' et par '
+      	L_PROPRIETE		= [[".."	, 			""	]]								// Un appel de propriété débute avec .. jusqu'à la fin du lemme
+      	L_ECHAP			= "\"													// Caractère d'échappement : \
+      	
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+      	// Style de coloration à modifier en cas de surcharge
+      	
+      	//					  Police, 		  Taille, 	Italique, 	Gras, Souligné, Couleur
+      	S_DEFAUT			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	noir]
+      	S_CHAÎNE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeClair]
+      	S_COMMENTAIRE		= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	GrisFoncé]
+      	S_CONSTANTE			= ["Courier New"	, 9, 		Vrai, 		Faux, Faux, 	rougefonce]
+      	S_ERREUR			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeFoncé]
+      	S_FONCTION			= ["Courier New"	, 9, 		Faux, 		vrai, Faux, 	RougeFoncé]
+      	S_MOTCLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeFoncé]
+      	S_NUMERIQUE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeClair]
+      	S_PROPRIETE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	Noir]
+      	S_SYMBOLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	Noir]
+      	S_VARIABLE			= ["Courier New"	, 9, 		Faux, 		Faux, Faux, 	RougeFoncé]		
+      	
+      	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+      	// Définition du langage SQL (partiel)
+      	
+      	_LANGAGE_ 	est un tableau de 0 cColoration::LANGAGE
+      	_ELEMENTS_	est un cColoration::LANGAGE
+      		
+      	// Définit les mots-clés
+      	_ELEMENTS_ =    [MARK_LANG_MOTCLÉ, [ ...
+      						"CREATE", "ALTER", "DROP", ...
+      						"INSERT", "UPDATE", "DELETE", "SELECT", ...
+      						"GRANT", "REVOKE", "COMMIT", "ROLLBACK", ...
+      						"DISTINCT", "AS", "FROM", "WHERE", "GROUP", "ORDER", "BY", "HAVING", "ASC", "DESC", ...
+      						"AND", "OR", "NOT", "IN", "LIKE", "ALL", "SOME", "ANY", "EXISTS", "BETWEEN", "MATCH", "AGAINST", "BOOLEAN", "MODE",  ...
+      						"LEFT", "RIGHT", "OUTER", "INNER", "JOIN", "ON", "UNION", "INTERSECT", "EXCEPT", "CASE", "FULL", "NATURAL", "UNIQUE", "LIMIT" ...
+      					]]
+      	
+      	//				
+      	// Syntaxe équivalente (plus longue) :
+      	//
+      	// VariableRAZ(_ELEMENTS_)
+      	// _ELEMENTS_:nMarqueur = ::MARK_LANG_MOTCLÉ
+      	// TableauAjoute(_ELEMENTS_:tabEléments, "CREATE")
+      	// TableauAjoute(_ELEMENTS_:tabEléments, "ALTER")
+      	// ...
+      	// TableauAjoute(_ELEMENTS_:tabEléments, "LIMIT")
+      					
+      	// Enregistre les mots-clés
+      	Ajoute(_LANGAGE_, _ELEMENTS_)
+      	
+      	
+      	// Définit les fonctions
+      	_ELEMENTS_ =    [MARK_LANG_FONCTION, [ ...
+      						"COUNT", "AVG", "MIN", "MAX", "SUM", ...
+      						"CURRENT_DATE", "CURRENT_TIME", "CURRENT_TIMESTAMP", "CURRENT_USER", "SESSION_USER", "SYSTEM_USER", ...
+      						"CAST", "COALESCE", "NULLIF", "OCTET_LENGTH", "LENGTH", "NVL", "TO_CHAR", "TO_DATE", "TO_NUMBER", ... 
+      						"CHAR_LENGTH", "CHARACTER_LENGTH", "COLLATE", "CONCATENATE", "CONCAT", "CONVERT", "LOWER", "POSITION", "SUBSTRING", "SUBSTR", ...
+      						"TRANSLATE", "TRIM", "UPPER", "CHAR", "LOCATE", "LCASE", "UCASE", "INSTR", "LPAD", "LTRIM", "RPAD", "RTRIM", "PATINDEX", "REPLACE", ...
+      						"REVERSE", "SPACE", "BIT_LENGTH", "ABS", "ASCII", "ASIN", "ATAN", "CEILING", "COS", "COT", "EXP", "FLOOR", "LN", "LOG", "LOG10", "MOD", ... 
+      						"POWER", "RAND", "ROUND", "SIGN", "SIN", "SQRT", "TAN", "TRUNC", "TRUNCATE", "UNICODE", "EXTRACT", "INTERVAL", "OVERLAPS" ...
+      					]] 
+      	
+      	// Enregistre les fonctions
+      	ajoute(_LANGAGE_, _ELEMENTS_)
+      				
+      	// Définit les constantes
+      	_ELEMENTS_ =    [MARK_LANG_CONSTANTE, [...
+      						"PI", "TRUE", "FALSE", "UNKNOWN", "NULL" ...
+      					]]
+      					
+      	// Enregistre les constantes
+      	Ajoute(_LANGAGE_, _ELEMENTS_)
+      
+      	// Non utilisés :
+      	// MARK_LANG_SYMBOLE
+      	// MARK_LANG_PROPRIÉTÉ		
+      	// MARK_LANG_VARIABLE	
+      				 
+      	// Définit le langage à utiliser	
+      	SetLangage(_LANGAGE_)
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1767097601698632427
+     type_code : 28
+     code : |1+
+      Procédure Destructeur()
+      
+     type : 655360
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : CClasse1
+resources :
+ string_res :
+  identifier : 0x1fbe1c7800225e74
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
